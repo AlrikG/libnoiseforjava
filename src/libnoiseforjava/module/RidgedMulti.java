@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2003, 2004 Jason Bevins (original libnoise code)
- * Copyright © 2010 Thomas J. Hodge (java port of libnoise)
+ * Copyright (c) 2010 Thomas J. Hodge (java port of libnoise)
+ * Copyright (c) 2014 Nick Whitney (changed noisegen to perlin basis)
  * 
  * This file is part of libnoiseforjava.
  * 
@@ -25,8 +26,10 @@
 
 package libnoiseforjava.module;
 
-import libnoiseforjava.NoiseGen;
+import java.util.Random;
+
 import libnoiseforjava.NoiseQuality;
+import libnoiseforjava.PerlinBasis;
 import libnoiseforjava.exception.ExceptionInvalidParam;
 
 public class RidgedMulti extends ModuleBase
@@ -121,9 +124,6 @@ public class RidgedMulti extends ModuleBase
    /// Frequency multiplier between successive octaves.
    double lacunarity;
 
-   /// Quality of the ridged-multifractal noise.
-   NoiseQuality noiseQuality;
-
    /// Total number of octaves that generate the ridged-multifractal
    /// noise.
    int octaveCount;
@@ -134,95 +134,97 @@ public class RidgedMulti extends ModuleBase
    /// Seed value used by the ridged-multfractal-noise function.
    int seed;
 
+	private PerlinBasis[] source;
+	double[] frequencies;
+	double[] amplitudes;
 
-   public RidgedMulti ()
-   {
-      super(0);
-      frequency = DEFAULT_RIDGED_FREQUENCY;
-      lacunarity = DEFAULT_RIDGED_LACUNARITY;
-      noiseQuality = DEFAULT_RIDGED_QUALITY;
-      octaveCount = DEFAULT_RIDGED_OCTAVE_COUNT;
-      seed = DEFAULT_RIDGED_SEED;
+	public RidgedMulti ()
+	{
+	   super(0);
+      	frequency = DEFAULT_RIDGED_FREQUENCY;
+      	lacunarity = DEFAULT_RIDGED_LACUNARITY;
+      	octaveCount = DEFAULT_RIDGED_OCTAVE_COUNT;
+      	seed = DEFAULT_RIDGED_SEED;
+   	}
+   
+	public void build()
+	{
+		source = new PerlinBasis[octaveCount];
+		frequencies = new double[octaveCount];
+		Random rnd = new Random(seed);
+		
+		double h = 1.0;
+		double frequency1 = 1.0;
 
-      calcSpectralWeights();
-   }
+		for(int i = 0; i < octaveCount; i++)
+		{
+			source[i] = new PerlinBasis();
+			
+			if(seed != 0)
+			{
+				
+				seed = rnd.nextInt();
+				source[i].setSeed(seed + 1);
+			}
+			else
+			{
+				source[i].setSeed(seed);
+			}
+			
+			frequencies[i] = Math.pow(lacunarity, i);
+			
+			this.spectralWeights[i] = Math.pow (frequency1, -h);
+			frequency1 *= lacunarity;
+		}
+	}
 
-   // Calculates the spectral weights for each octave.
-   public void calcSpectralWeights ()
-   {
-      // This exponent parameter should be user-defined; it may be exposed in a
-      // future version of libnoise.
-      double h = 1.0;
+	// Multifractal code originally written by F. Kenton "Doc Mojo" Musgrave,
+	// 1998.  Modified by jas for use with libnoise.
+	@Override
+	public double getValue (double x, double y, double z)
+	{
+		x *= frequency;
+		y *= frequency;
+		z *= frequency;
 
-      double frequency = 1.0;
-      for (int i = 0; i < RIDGED_MAX_OCTAVE; i++) {
-         // Compute weight for each frequency.
-         this.spectralWeights[i] = Math.pow (frequency, -h);
-         frequency *= lacunarity;
-      }
-   }
+		double signal = 0.0;
+		double value  = 0.0;
+		double weight = 1.0;
 
-   // Multifractal code originally written by F. Kenton "Doc Mojo" Musgrave,
-   // 1998.  Modified by jas for use with libnoise.
-   public double getValue (double x, double y, double z)
-   {
-      x *= frequency;
-      y *= frequency;
-      z *= frequency;
+		// These parameters should be user-defined; they may be exposed in a
+		// future version of libnoiseforjava.
+		double offset = 1.0;
+		double gain = 2.0;
 
-      double signal = 0.0;
-      double value  = 0.0;
-      double weight = 1.0;
+		for (int curOctave = 0; curOctave < octaveCount; curOctave++)
+		{		
+			signal = source[curOctave].getValue(x * frequencies[curOctave], y * frequencies[curOctave], z * frequencies[curOctave]);
+			
+			// Make the ridges.
+			signal = Math.abs (signal);
+			signal = offset - signal;
 
-      // These parameters should be user-defined; they may be exposed in a
-      // future version of libnoiseforjava.
-      double offset = 1.0;
-      double gain = 2.0;
+			// Square the signal to increase the sharpness of the ridges.
+			signal *= signal;
 
-      for (int curOctave = 0; curOctave < octaveCount; curOctave++)
-      {
-         // Make sure that these floating-point values have the same range as a 32-
-         // bit integer so that we can pass them to the coherent-noise functions.
-         double nx, ny, nz;
-         nx = NoiseGen.MakeInt32Range (x);
-         ny = NoiseGen.MakeInt32Range (y);
-         nz = NoiseGen.MakeInt32Range (z);
+			// The weighting from the previous octave is applied to the signal.
+			// Larger values have higher weights, producing sharp points along the
+			// ridges.
+			signal *= weight;
 
-         // Get the coherent-noise value.
-         int curSeed = (seed + curOctave) & 0x7fffffff;
-         signal = NoiseGen.GradientCoherentNoise3D (nx, ny, nz, curSeed, noiseQuality);
+			// Weight successive contributions by the previous signal.
+			weight = signal * gain;
+			if (weight > 1.0)
+				weight = 1.0;
+			if (weight < 0.0)
+				weight = 0.0;
 
-         // Make the ridges.
-         signal = Math.abs (signal);
-         signal = offset - signal;
+			// Add the signal to the output value.
+			value += (signal * spectralWeights[curOctave]);
+		}
 
-         // Square the signal to increase the sharpness of the ridges.
-         signal *= signal;
-
-         // The weighting from the previous octave is applied to the signal.
-         // Larger values have higher weights, producing sharp points along the
-         // ridges.
-         signal *= weight;
-
-         // Weight successive contributions by the previous signal.
-         weight = signal * gain;
-         if (weight > 1.0)
-            weight = 1.0;
-         if (weight < 0.0)
-            weight = 0.0;
-
-
-         // Add the signal to the output value.
-         value += (signal * spectralWeights[curOctave]);
-
-         // Go to the next octave.
-         x *= lacunarity;
-         y *= lacunarity;
-         z *= lacunarity;
-      }
-
-      return (value * 1.25) - 1.0;
-   }
+		return (value * 1.25) - 1.0;
+	}
 
    public double getFrequency ()
    {
@@ -238,17 +240,6 @@ public class RidgedMulti extends ModuleBase
    public double getLacunarity ()
    {
       return lacunarity;
-   }
-
-   /// Returns the quality of the ridged-multifractal noise.
-   ///
-   /// @returns The quality of the ridged-multifractal noise.
-   ///
-   /// See noise::NoiseQuality for definitions of the various
-   /// coherent-noise qualities.
-   public NoiseQuality getNoiseQuality ()
-   {
-      return noiseQuality;
    }
 
    /// Returns the number of octaves that generate the
@@ -294,18 +285,6 @@ public class RidgedMulti extends ModuleBase
    public void setLacunarity (double lacunarity)
    {
       this.lacunarity = lacunarity;
-      calcSpectralWeights ();
-   }
-
-   /// Sets the quality of the ridged-multifractal noise.
-   ///
-   /// @param noiseQuality The quality of the ridged-multifractal noise.
-   ///
-   /// See NoiseQuality for definitions of the various
-   /// coherent-noise qualities.
-   public void setNoiseQuality (NoiseQuality noiseQuality)
-   {
-      this.noiseQuality = noiseQuality;
    }
 
    /// Sets the number of octaves that generate the ridged-multifractal
