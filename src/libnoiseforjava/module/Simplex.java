@@ -171,7 +171,7 @@ public class Simplex extends ModuleBase
 		seed = DEFAULT_SIMPLEX_SEED;
 	}
 	
-	public void setUp()
+	public void build()
 	{
 		source = new SimplexBasis[octaveCount];
 		frequencies = new double[octaveCount];
