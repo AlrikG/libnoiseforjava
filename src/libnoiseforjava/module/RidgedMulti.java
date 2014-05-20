@@ -26,7 +26,7 @@
 package libnoiseforjava.module;
 
 import libnoiseforjava.NoiseGen;
-import libnoiseforjava.NoiseGen.NoiseQuality;
+import libnoiseforjava.NoiseQuality;
 import libnoiseforjava.exception.ExceptionInvalidParam;
 
 public class RidgedMulti extends ModuleBase

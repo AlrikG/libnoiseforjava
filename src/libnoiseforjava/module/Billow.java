@@ -26,7 +26,7 @@
 package libnoiseforjava.module;
 
 import libnoiseforjava.NoiseGen;
-import libnoiseforjava.NoiseGen.NoiseQuality;
+import libnoiseforjava.NoiseQuality;
 
 public class Billow extends ModuleBase
 {
