@@ -63,7 +63,7 @@ public class Interp
       /// The alpha value should range from 0.0 to 1.0.  If the alpha value is
       /// 0.0, this function returns @a n0.  If the alpha value is 1.0, this
       /// function returns @a n1.
-      public static double linearInterp (double n0, double n1, double a)
+      public static double lerp (double n0, double n1, double a)
       {
         return ((1.0 - a) * n0) + (a * n1);
       }

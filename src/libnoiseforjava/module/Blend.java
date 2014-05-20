@@ -74,6 +74,6 @@ public class Blend extends ModuleBase
       double v1 = sourceModules[1].getValue (x, y, z);
       double alpha = (sourceModules[2].getValue (x, y, z) + 1.0) / 2.0;
 
-      return Interp.linearInterp (v0, v1, alpha);
+      return Interp.lerp (v0, v1, alpha);
    }
 }

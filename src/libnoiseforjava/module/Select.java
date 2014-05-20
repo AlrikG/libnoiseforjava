@@ -118,7 +118,7 @@ public class Select extends ModuleBase
             double upperCurve = (lowerBound + edgeFalloff);
             alpha = Interp.SCurve3 (
                   (controlValue - lowerCurve) / (upperCurve - lowerCurve));
-            return Interp.linearInterp (sourceModules[0].getValue (x, y, z),
+            return Interp.lerp (sourceModules[0].getValue (x, y, z),
                   sourceModules[2].getValue (x, y, z),
                   alpha);
          }
@@ -135,7 +135,7 @@ public class Select extends ModuleBase
             double upperCurve = (upperBound + edgeFalloff);
             alpha = Interp.SCurve3 (
                   (controlValue - lowerCurve) / (upperCurve - lowerCurve));
-            return Interp.linearInterp (sourceModules[1].getValue (x, y, z),
+            return Interp.lerp (sourceModules[1].getValue (x, y, z),
                   sourceModules[0].getValue (x, y, z),
                   alpha);
          }

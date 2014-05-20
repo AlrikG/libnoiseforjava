@@ -126,9 +126,9 @@ public class NoiseMapBuilderPlane extends NoiseMapBuilder
                neValue = planeModel.getValue (xCur + xExtent, zCur + zExtent);
                double xBlend = 1.0 - ((xCur - lowerXBound) / xExtent);
                double zBlend = 1.0 - ((zCur - lowerZBound) / zExtent);
-               double z0 = Interp.linearInterp (swValue, seValue, xBlend);
-               double z1 = Interp.linearInterp (nwValue, neValue, xBlend);
-               finalValue = Interp.linearInterp (z0, z1, zBlend);
+               double z0 = Interp.lerp (swValue, seValue, xBlend);
+               double z1 = Interp.lerp (nwValue, neValue, xBlend);
+               finalValue = Interp.lerp (z0, z1, zBlend);
             }
             
             destNoiseMap.setValue(x, z, finalValue);

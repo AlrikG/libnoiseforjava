@@ -75,20 +75,20 @@ public class NoiseGen
       double n0, n1, ix0, ix1, iy0, iy1;
       n0   = GradientNoise3D (x, y, z, x0, y0, z0, seed);
       n1   = GradientNoise3D (x, y, z, x1, y0, z0, seed);
-      ix0  = Interp.linearInterp (n0, n1, xs);
+      ix0  = Interp.lerp (n0, n1, xs);
       n0   = GradientNoise3D (x, y, z, x0, y1, z0, seed);
       n1   = GradientNoise3D (x, y, z, x1, y1, z0, seed);
-      ix1  = Interp.linearInterp (n0, n1, xs);
-      iy0  = Interp.linearInterp (ix0, ix1, ys);
+      ix1  = Interp.lerp (n0, n1, xs);
+      iy0  = Interp.lerp (ix0, ix1, ys);
       n0   = GradientNoise3D (x, y, z, x0, y0, z1, seed);
       n1   = GradientNoise3D (x, y, z, x1, y0, z1, seed);
-      ix0  = Interp.linearInterp (n0, n1, xs);
+      ix0  = Interp.lerp (n0, n1, xs);
       n0   = GradientNoise3D (x, y, z, x0, y1, z1, seed);
       n1   = GradientNoise3D (x, y, z, x1, y1, z1, seed);
-      ix1  = Interp.linearInterp (n0, n1, xs);
-      iy1  = Interp.linearInterp (ix0, ix1, ys);
+      ix1  = Interp.lerp (n0, n1, xs);
+      iy1  = Interp.lerp (ix0, ix1, ys);
 
-      return Interp.linearInterp (iy0, iy1, zs);
+      return Interp.lerp (iy0, iy1, zs);
    }
 
    public static double GradientNoise3D (double fx, double fy, double fz, int ix,
@@ -184,20 +184,20 @@ public class NoiseGen
       double n0, n1, ix0, ix1, iy0, iy1;
       n0   = ValueNoise3D (x0, y0, z0, seed);
       n1   = ValueNoise3D (x1, y0, z0, seed);
-      ix0  = Interp.linearInterp (n0, n1, xs);
+      ix0  = Interp.lerp (n0, n1, xs);
       n0   = ValueNoise3D (x0, y1, z0, seed);
       n1   = ValueNoise3D (x1, y1, z0, seed);
-      ix1  = Interp.linearInterp (n0, n1, xs);
-      iy0  = Interp.linearInterp (ix0, ix1, ys);
+      ix1  = Interp.lerp (n0, n1, xs);
+      iy0  = Interp.lerp (ix0, ix1, ys);
       n0   = ValueNoise3D (x0, y0, z1, seed);
       n1   = ValueNoise3D (x1, y0, z1, seed);
-      ix0  = Interp.linearInterp (n0, n1, xs);
+      ix0  = Interp.lerp (n0, n1, xs);
       n0   = ValueNoise3D (x0, y1, z1, seed);
       n1   = ValueNoise3D (x1, y1, z1, seed);
-      ix1  = Interp.linearInterp (n0, n1, xs);
-      iy1  = Interp.linearInterp (ix0, ix1, ys);
+      ix1  = Interp.lerp (n0, n1, xs);
+      iy1  = Interp.lerp (ix0, ix1, ys);
   
-      return Interp.linearInterp (iy0, iy1, zs);
+      return Interp.lerp (iy0, iy1, zs);
    }
 
    public static double ValueNoise3D (int x, int y, int z, int seed)

@@ -292,9 +292,9 @@ public class RendererImage
 
       // First, blend the source color to the background color using the alpha
       // of the source color.
-      double red   = Interp.linearInterp (backgroundRed,   sourceRed  , sourceAlpha);
-      double green = Interp.linearInterp (backgroundGreen, sourceGreen, sourceAlpha);
-      double blue  = Interp.linearInterp (backgroundBlue,  sourceBlue , sourceAlpha);
+      double red   = Interp.lerp (backgroundRed,   sourceRed  , sourceAlpha);
+      double green = Interp.lerp (backgroundGreen, sourceGreen, sourceAlpha);
+      double blue  = Interp.lerp (backgroundBlue,  sourceBlue , sourceAlpha);
 
       if (isLightEnabled)
       {

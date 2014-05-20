@@ -195,7 +195,7 @@ public class Terrace extends ModuleBase
       alpha *= alpha;
 
       // Now perform the linear interpolation given the alpha value.
-      return Interp.linearInterp (value0, value1, alpha);
+      return Interp.lerp (value0, value1, alpha);
    }
 
    /// Inserts the control point at the specified position in the
