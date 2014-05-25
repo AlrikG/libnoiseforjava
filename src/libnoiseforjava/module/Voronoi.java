@@ -26,6 +26,7 @@
 
 package libnoiseforjava.module;
 
+import libnoiseforjava.NoiseGen;
 import libnoiseforjava.PerlinBasis;
 
 /** 
@@ -154,9 +155,9 @@ public class Voronoi extends ModuleBase
 				{
 					// Calculate the position and distance to the seed point inside of
 					// this unit cube.
-					double xPos = xCur + noisesource[0].getValue (xCur, yCur, zCur);
-					double yPos = yCur + noisesource[1].getValue (xCur, yCur, zCur);
-					double zPos = zCur + noisesource[2].getValue (xCur, yCur, zCur);
+					double xPos = xCur + NoiseGen.ValueNoise3D (xCur, yCur, zCur, seed);
+					double yPos = yCur + NoiseGen.ValueNoise3D (xCur, yCur, zCur, seed + 1);
+					double zPos = zCur + NoiseGen.ValueNoise3D (xCur, yCur, zCur, seed + 2);
 					double xDist = xPos - x;
 					double yDist = yPos - y;
 					double zDist = zPos - z;
