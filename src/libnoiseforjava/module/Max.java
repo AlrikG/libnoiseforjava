@@ -41,7 +41,8 @@ public class Max extends ModuleBase
       setSourceModule(1, sourceModuleTwo);
    }
 
-   public double getValue (double x, double y, double z)
+   @Override
+public double getValue (double x, double y, double z)
     {
       assert (sourceModules[0] != null);
       assert (sourceModules[1] != null);

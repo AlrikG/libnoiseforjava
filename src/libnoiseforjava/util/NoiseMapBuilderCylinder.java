@@ -76,7 +76,8 @@ public class NoiseMapBuilderCylinder extends NoiseMapBuilder
       upperHeightBound = 0.0;
    }
 
-   public void build () throws ExceptionInvalidParam
+   @Override
+public void build () throws ExceptionInvalidParam
    {
       if (upperAngleBound <= lowerAngleBound
             || upperHeightBound <= lowerHeightBound
@@ -97,8 +98,8 @@ public class NoiseMapBuilderCylinder extends NoiseMapBuilder
 
       double angleExtent  = upperAngleBound  - lowerAngleBound ;
       double heightExtent = upperHeightBound - lowerHeightBound;
-      double xDelta = angleExtent  / (double)destWidth ;
-      double yDelta = heightExtent / (double)destHeight;
+      double xDelta = angleExtent  / destWidth ;
+      double yDelta = heightExtent / destHeight;
       double curAngle  = lowerAngleBound ;
       double curHeight = lowerHeightBound;
 

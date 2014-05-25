@@ -282,13 +282,13 @@ public class RendererImage
    public ColorCafe calcDestColor (ColorCafe sourceColor, ColorCafe backgroundColor,
          double lightValue)
    {
-      double sourceRed   = (double)sourceColor.red   / 255.0;
-      double sourceGreen = (double)sourceColor.green / 255.0;
-      double sourceBlue  = (double)sourceColor.blue  / 255.0;
-      double sourceAlpha = (double)sourceColor.alpha / 255.0;
-      double backgroundRed   = (double)backgroundColor.red   / 255.0;
-      double backgroundGreen = (double)backgroundColor.green / 255.0;
-      double backgroundBlue  = (double)backgroundColor.blue  / 255.0;
+      double sourceRed   = sourceColor.red   / 255.0;
+      double sourceGreen = sourceColor.green / 255.0;
+      double sourceBlue  = sourceColor.blue  / 255.0;
+      double sourceAlpha = sourceColor.alpha / 255.0;
+      double backgroundRed   = backgroundColor.red   / 255.0;
+      double backgroundGreen = backgroundColor.green / 255.0;
+      double backgroundBlue  = backgroundColor.blue  / 255.0;
 
       // First, blend the source color to the background color using the alpha
       // of the source color.
@@ -299,9 +299,9 @@ public class RendererImage
       if (isLightEnabled)
       {
          // Now calculate the light color.
-         double lightRed   = lightValue * (double)lightColor.red   / 255.0;
-         double lightGreen = lightValue * (double)lightColor.green / 255.0;
-         double lightBlue  = lightValue * (double)lightColor.blue  / 255.0;
+         double lightRed   = lightValue * lightColor.red   / 255.0;
+         double lightGreen = lightValue * lightColor.green / 255.0;
+         double lightBlue  = lightValue * lightColor.blue  / 255.0;
 
          // Apply the light color to the new color.
          red   *= lightRed  ;
@@ -439,12 +439,12 @@ public class RendererImage
                {
                   if (x == 0)
                   {
-                     xLeftOffset  = (int)width - 1;
+                     xLeftOffset  = width - 1;
                      xRightOffset = 1;}
-                  else if (x == (int)width - 1)
+                  else if (x == width - 1)
                   {
                      xLeftOffset  = -1;
-                     xRightOffset = -((int)width - 1);
+                     xRightOffset = -(width - 1);
                   }
                   else
                   {
@@ -454,13 +454,13 @@ public class RendererImage
 
                   if (y == 0)
                   {
-                     yDownOffset = (int)height - 1;
+                     yDownOffset = height - 1;
                      yUpOffset   = 1;
                   } 
-                  else if (y == (int)height - 1) 
+                  else if (y == height - 1) 
                   {
                      yDownOffset = -1;
-                     yUpOffset   = -((int)height - 1);
+                     yUpOffset   = -(height - 1);
                   } 
                   else
                   {
@@ -475,7 +475,7 @@ public class RendererImage
                      xLeftOffset  = 0;
                      xRightOffset = 1;
                   } 
-                  else if (x == (int)width - 1)
+                  else if (x == width - 1)
                   {
                      xLeftOffset  = -1;
                      xRightOffset = 0;
@@ -491,7 +491,7 @@ public class RendererImage
                      yDownOffset = 0;
                      yUpOffset   = 1;
                   }
-                  else if (y == (int)height - 1)
+                  else if (y == height - 1)
                   {
                      yDownOffset = -1;
                      yUpOffset   = 0;
@@ -505,11 +505,11 @@ public class RendererImage
 
                // Get the noise value of the current point in the source noise map
                // and the noise values of its four-neighbors.
-               double nc = (double)(sourceNoiseMap.getValue(x,y));
-               double nl = (double)(sourceNoiseMap.getValue(x + xLeftOffset, y));
-               double nr = (double)(sourceNoiseMap.getValue(x + xRightOffset, y));
-               double nd = (double)(sourceNoiseMap.getValue(x,y + yDownOffset));
-               double nu = (double)(sourceNoiseMap.getValue(x,y + yUpOffset));
+               double nc = (sourceNoiseMap.getValue(x,y));
+               double nl = (sourceNoiseMap.getValue(x + xLeftOffset, y));
+               double nr = (sourceNoiseMap.getValue(x + xRightOffset, y));
+               double nd = (sourceNoiseMap.getValue(x,y + yDownOffset));
+               double nu = (sourceNoiseMap.getValue(x,y + yUpOffset));
 
                // Now we can calculate the lighting intensity.
                lightIntensity = calcLightIntensity (nc, nl, nr, nd, nu);

@@ -64,7 +64,7 @@ public class ScalePoint extends ModuleBase
    double zScale;
 
 
-   public ScalePoint (ModuleBase sourceModule) throws ExceptionInvalidParam
+   public ScalePoint (ModuleBase sourceModule)
    {
       super(1);
       setSourceModule(0, sourceModule);
@@ -74,7 +74,8 @@ public class ScalePoint extends ModuleBase
       zScale = DEFAULT_SCALE_POINT_Z; 
    }
 
-   public double getValue (double x, double y, double z)
+   @Override
+public double getValue (double x, double y, double z)
    {
       assert (sourceModules[0] != null);
 

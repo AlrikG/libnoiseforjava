@@ -37,5 +37,4 @@ public class ExceptionNoModule extends Exception
    {
       super(message);
    }
-
 }

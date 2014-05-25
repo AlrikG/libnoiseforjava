@@ -38,7 +38,8 @@ public class Invert extends ModuleBase
       setSourceModule(0, sourceModule);
    }
 
-   public double getValue (double x, double y, double z)
+   @Override
+public double getValue (double x, double y, double z)
    {
       assert (sourceModules[0] != null);
 

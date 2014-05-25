@@ -44,7 +44,8 @@ public class Checkerboard extends ModuleBase
       super(0);
    }
 
-   public double getValue (double x, double y, double z)
+   @Override
+public double getValue (double x, double y, double z)
    {
       int ix = (int)(Math.floor(NoiseGen.MakeInt32Range (x)));
       int iy = (int)(Math.floor(NoiseGen.MakeInt32Range (y)));

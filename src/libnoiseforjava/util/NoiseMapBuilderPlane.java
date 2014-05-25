@@ -82,7 +82,8 @@ public class NoiseMapBuilderPlane extends NoiseMapBuilder
       upperZBound = 0.0;
    }
 
-   public void build () throws ExceptionInvalidParam
+   @Override
+public void build () throws ExceptionInvalidParam
    {
       if ( upperXBound <= lowerXBound
             || upperZBound <= lowerZBound
@@ -102,8 +103,8 @@ public class NoiseMapBuilderPlane extends NoiseMapBuilder
 
       double xExtent = upperXBound - lowerXBound;
       double zExtent = upperZBound - lowerZBound;
-      double xDelta  = xExtent / (double)destWidth ;
-      double zDelta  = zExtent / (double)destHeight;
+      double xDelta  = xExtent / destWidth ;
+      double zDelta  = zExtent / destHeight;
       double xCur    = lowerXBound;
       double zCur    = lowerZBound;
       

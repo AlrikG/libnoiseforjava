@@ -336,11 +336,15 @@ public class Perlin extends ModuleBase
 	///
 	/// The larger the number of octaves, the more time required to
 	/// calculate the Perlin-noise value.
-	public void setOctaveCount (int octaveCount) throws ExceptionInvalidParam
+	public void setOctaveCount (int octaveCount)
 	{
-		if (octaveCount < 1 || octaveCount > PERLIN_MAX_OCTAVE)
+		if (octaveCount < 1)
 		{
-			throw new ExceptionInvalidParam ("Invalid parameter In Perlin Noise Module");
+			octaveCount = 1;
+		}
+		else if(octaveCount > PERLIN_MAX_OCTAVE)
+		{
+			octaveCount = PERLIN_MAX_OCTAVE;
 		}
 
 		this.octaveCount = octaveCount;

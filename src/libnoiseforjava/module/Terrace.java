@@ -149,7 +149,8 @@ public class Terrace extends ModuleBase
       return insertionPos;
    }
 
-   public double getValue (double x, double y, double z)
+   @Override
+public double getValue (double x, double y, double z)
    {
       assert (sourceModules[0] != null);
       assert (controlPointCount >= 2);
@@ -261,9 +262,9 @@ public class Terrace extends ModuleBase
 
       clearAllControlPoints ();
 
-      double terraceStep = 2.0 / ((double)controlPointCount - 1.0);
+      double terraceStep = 2.0 / (controlPointCount - 1.0);
       double curValue = -1.0;
-      for (int i = 0; i < (int)controlPointCount; i++)
+      for (int i = 0; i < controlPointCount; i++)
       {
          addControlPoint (curValue);
          curValue += terraceStep;

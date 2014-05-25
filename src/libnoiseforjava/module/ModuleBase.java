@@ -158,13 +158,7 @@ public class ModuleBase
    /// A noise module does not modify a source module; it only modifies
    /// its output values.
    public void setSourceModule (int index, ModuleBase sourceModule)
-   throws ExceptionInvalidParam
    {
-      if (sourceModules != null)
-      {
-         if (index >= getSourceModuleCount () || index < 0)
-            throw new ExceptionInvalidParam ("Invalid Parameter in ModuleBase");
-      }
       this.sourceModules[index] = sourceModule;
    }
 

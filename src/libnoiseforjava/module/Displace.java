@@ -64,7 +64,8 @@ public class Displace extends ModuleBase
       setSourceModule(3, sourceModuleFour);
    }
 
-   public double getValue (double x, double y, double z)
+   @Override
+public double getValue (double x, double y, double z)
    {
       assert (sourceModules[0] != null);
       assert (sourceModules[1] != null);

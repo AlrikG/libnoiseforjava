@@ -111,7 +111,8 @@ public class RotatePoint extends ModuleBase
       setAngles (DEFAULT_ROTATE_X, DEFAULT_ROTATE_Y, DEFAULT_ROTATE_Z);
    }
 
-   public double getValue (double x, double y, double z)
+   @Override
+public double getValue (double x, double y, double z)
    {
       assert (sourceModules[0] != null);
 

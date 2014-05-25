@@ -64,7 +64,8 @@ public class Spheres extends ModuleBase
       frequency = DEFAULT_SPHERES_FREQUENCY;
    }
 
-   public double getValue (double x, double y, double z)
+   @Override
+public double getValue (double x, double y, double z)
    {
       x *= frequency;
       y *= frequency;

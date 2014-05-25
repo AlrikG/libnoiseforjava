@@ -66,7 +66,8 @@ public class Clamp extends ModuleBase
       upperBound = DEFAULT_CLAMP_UPPER_BOUND;
    }
 
-   public double getValue (double x, double y, double z)
+   @Override
+public double getValue (double x, double y, double z)
    {
       assert (sourceModules[0] != null);
 

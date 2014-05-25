@@ -64,7 +64,8 @@ public class Cylinders extends ModuleBase
       frequency = DEFAULT_CYLINDERS_FREQUENCY;
    }
 
-   public double getValue (double x, double y, double z)
+   @Override
+public double getValue (double x, double y, double z)
    {
       x *= frequency;
       z *= frequency;

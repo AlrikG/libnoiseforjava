@@ -52,19 +52,19 @@ public class NoiseGen
       switch (noiseQuality)
       {
          case QUALITY_FAST:
-            xs = (x - (double)x0);
-            ys = (y - (double)y0);
-            zs = (z - (double)z0);
+            xs = (x - x0);
+            ys = (y - y0);
+            zs = (z - z0);
             break;
          case QUALITY_STD:
-            xs = Interp.SCurve3 (x - (double)x0);
-            ys = Interp.SCurve3 (y - (double)y0);
-            zs = Interp.SCurve3 (z - (double)z0);
+            xs = Interp.SCurve3 (x - x0);
+            ys = Interp.SCurve3 (y - y0);
+            zs = Interp.SCurve3 (z - z0);
             break;
          case QUALITY_BEST:
-            xs = Interp.SCurve5 (x - (double)x0);
-            ys = Interp.SCurve5 (y - (double)y0);
-            zs = Interp.SCurve5 (z - (double)z0);
+            xs = Interp.SCurve5 (x - x0);
+            ys = Interp.SCurve5 (y - y0);
+            zs = Interp.SCurve5 (z - z0);
             break;
       }
 
@@ -116,9 +116,9 @@ public class NoiseGen
 
       // Set up us another vector equal to the distance between the two vectors
       // passed to this function.
-      double xvPoint = (fx - (double)ix);
-      double yvPoint = (fy - (double)iy);
-      double zvPoint = (fz - (double)iz);
+      double xvPoint = (fx - ix);
+      double yvPoint = (fy - iy);
+      double zvPoint = (fz - iz);
 
       // Now compute the dot product of the gradient vector with the distance
       // vector.  The resulting value is gradient noise.  Apply a scaling value
@@ -161,19 +161,19 @@ public class NoiseGen
       switch (noiseQuality)
       {
          case QUALITY_FAST:
-            xs = (x - (double)x0);
-            ys = (y - (double)y0);
-            zs = (z - (double)z0);
+            xs = (x - x0);
+            ys = (y - y0);
+            zs = (z - z0);
             break;
          case QUALITY_STD:
-            xs = Interp.SCurve3 (x - (double)x0);
-            ys = Interp.SCurve3 (y - (double)y0);
-            zs = Interp.SCurve3 (z - (double)z0);
+            xs = Interp.SCurve3 (x - x0);
+            ys = Interp.SCurve3 (y - y0);
+            zs = Interp.SCurve3 (z - z0);
             break;
          case QUALITY_BEST:
-            xs = Interp.SCurve5 (x - (double)x0);
-            ys = Interp.SCurve5 (y - (double)y0);
-            zs = Interp.SCurve5 (z - (double)z0);
+            xs = Interp.SCurve5 (x - x0);
+            ys = Interp.SCurve5 (y - y0);
+            zs = Interp.SCurve5 (z - z0);
             break;
       }
 
@@ -202,7 +202,7 @@ public class NoiseGen
 
    public static double ValueNoise3D (int x, int y, int z, int seed)
    {
-      return 1.0 - ((double)IntValueNoise3D (x, y, z, seed) / 1073741824.0);
+      return 1.0 - (IntValueNoise3D (x, y, z, seed) / 1073741824.0);
    }
    
    /// Modifies a floating-point value so that it can be stored in a

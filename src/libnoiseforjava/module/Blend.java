@@ -64,7 +64,8 @@ public class Blend extends ModuleBase
       setSourceModule(2, sourceModuleThree);
    }
 
-   public double getValue (double x, double y, double z)
+   @Override
+public double getValue (double x, double y, double z)
    {
       assert (sourceModules[0] != null);
       assert (sourceModules[1] != null);

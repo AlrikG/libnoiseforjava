@@ -49,7 +49,8 @@ public class Const extends ModuleBase
       this.constValue = DEFAULT_CONST_VALUE;
    }
 
-   public double getValue (double x, double y, double z)
+   @Override
+public double getValue (double x, double y, double z)
    {
       return constValue;
    }

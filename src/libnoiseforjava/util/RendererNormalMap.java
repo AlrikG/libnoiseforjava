@@ -161,24 +161,24 @@ public class RendererNormalMap
             int xRightOffset, yUpOffset;
             if (isWrapEnabled)
             {
-               if (x == (int)width - 1)
-                  xRightOffset = -((int)width - 1);
+               if (x == width - 1)
+                  xRightOffset = -(width - 1);
                else
                   xRightOffset = 1;
 
-               if (y == (int)height - 1)
-                  yUpOffset = -((int)height - 1);
+               if (y == height - 1)
+                  yUpOffset = -(height - 1);
                else
                   yUpOffset = 1;
             }
             else
             {
-               if (x == (int)width - 1)
+               if (x == width - 1)
                   xRightOffset = 0;
                else
                   xRightOffset = 1;
 
-               if (y == (int)height - 1)
+               if (y == height - 1)
                   yUpOffset = 0;
                else
                   yUpOffset = 1;
@@ -187,9 +187,9 @@ public class RendererNormalMap
 
             // Get the noise value of the current point in the source noise map
             // and the noise values of its right and up neighbors.
-            double nc = (double)(sourceNoiseMap.getValue(x, y));
-            double nr = (double)(sourceNoiseMap.getValue((x + xRightOffset),y));
-            double nu = (double)(sourceNoiseMap.getValue(x, (y + yUpOffset)));
+            double nc = (sourceNoiseMap.getValue(x, y));
+            double nr = (sourceNoiseMap.getValue((x + xRightOffset),y));
+            double nu = (sourceNoiseMap.getValue(x, (y + yUpOffset)));
 
             // Calculate the normal product.
             destImageCafe.setValue(x,y, (calcNormalColor (nc, nr, nu, bumpHeight)));

@@ -13,7 +13,6 @@ package libnoiseforjava.module;
 
 import java.util.Random;
 
-import libnoiseforjava.Misc;
 import libnoiseforjava.NoiseQuality;
 import libnoiseforjava.SimplexBasis;
 
@@ -193,6 +192,7 @@ public class Simplex extends ModuleBase
 		}
 	}
 
+	@Override
 	public double getValue(double x, double y, double z)
 	{
 		double value = 0;

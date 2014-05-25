@@ -42,7 +42,8 @@ public class Abs extends ModuleBase
       setSourceModule(0, sourceModule);
    }
 
-   public double getValue (double x, double y, double z)
+   @Override
+public double getValue (double x, double y, double z)
    {
       assert (this.sourceModules[0] != null);
 

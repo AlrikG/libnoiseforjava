@@ -70,7 +70,8 @@ public class NoiseMapBuilderSphere extends NoiseMapBuilder
       westLonBound = 0.0;
    }
 
-   public void build () throws ExceptionInvalidParam
+   @Override
+public void build () throws ExceptionInvalidParam
    {
       if ( eastLonBound <= westLonBound
             || northLatBound <= southLatBound
@@ -91,8 +92,8 @@ public class NoiseMapBuilderSphere extends NoiseMapBuilder
 
       double lonExtent = eastLonBound  - westLonBound ;
       double latExtent = northLatBound - southLatBound;
-      double xDelta = lonExtent / (double)destWidth ;
-      double yDelta = latExtent / (double)destHeight;
+      double xDelta = lonExtent / destWidth ;
+      double yDelta = latExtent / destHeight;
       double curLon = westLonBound ;
       double curLat = southLatBound;
 

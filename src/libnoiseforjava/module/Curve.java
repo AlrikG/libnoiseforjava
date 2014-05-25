@@ -97,7 +97,8 @@ public class Curve extends ModuleBase
       return insertionPos;
    }
 
-   public double getValue (double x, double y, double z)
+   @Override
+public double getValue (double x, double y, double z)
    {
       assert (sourceModules[0] != null);
       assert (controlPointCount >= 4);
