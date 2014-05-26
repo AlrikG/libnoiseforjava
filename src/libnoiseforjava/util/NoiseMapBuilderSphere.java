@@ -25,7 +25,6 @@
 
 package libnoiseforjava.util;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
 import libnoiseforjava.model.Sphere;
 
 public class NoiseMapBuilderSphere extends NoiseMapBuilder
@@ -61,7 +60,7 @@ public class NoiseMapBuilderSphere extends NoiseMapBuilder
    /// Western boundary of the spherical noise map, in degrees.
    double westLonBound;
 
-   public NoiseMapBuilderSphere () throws ExceptionInvalidParam
+   public NoiseMapBuilderSphere () throws IllegalArgumentException
    {
       super();
       eastLonBound = 0.0;
@@ -71,7 +70,7 @@ public class NoiseMapBuilderSphere extends NoiseMapBuilder
    }
 
    @Override
-public void build () throws ExceptionInvalidParam
+public void build () throws IllegalArgumentException
    {
       if ( eastLonBound <= westLonBound
             || northLatBound <= southLatBound
@@ -79,7 +78,7 @@ public void build () throws ExceptionInvalidParam
             || destHeight <= 0
             || sourceModule == null
             || destNoiseMap == null) 
-         throw new ExceptionInvalidParam ("Invalid Parameter in NoiseMapBuilderSphere");
+         throw new IllegalArgumentException ("Invalid Parameter in NoiseMapBuilderSphere");
 
 
       // Resize the destination noise map so that it can store the new output
@@ -161,11 +160,11 @@ public void build () throws ExceptionInvalidParam
    ///
    /// @throw noise::ExceptionInvalidParam See the preconditions.
    public void setBounds (double southLatBound, double northLatBound,
-         double westLonBound, double eastLonBound) throws ExceptionInvalidParam
+         double westLonBound, double eastLonBound) throws IllegalArgumentException
    {
       if (southLatBound >= northLatBound
             || westLonBound >= eastLonBound)
-         throw new ExceptionInvalidParam ("Invalid Parameter in NoiseMapBuilderSphere");
+         throw new IllegalArgumentException ("Invalid Parameter in NoiseMapBuilderSphere");
 
       this.southLatBound = southLatBound;
       this.northLatBound = northLatBound;

@@ -26,8 +26,6 @@
 
 package libnoiseforjava.module;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
-
 public class Turbulence extends ModuleBase
 {
 	/// Noise module that randomly displaces the input value before
@@ -111,7 +109,7 @@ public class Turbulence extends ModuleBase
 	/// Noise module that displaces the @a z coordinate.
 	Perlin zDistortModule;
 
-	public Turbulence (ModuleBase sourceModule) throws ExceptionInvalidParam
+	public Turbulence (ModuleBase sourceModule) throws IllegalArgumentException
 	{
 		super(1);
 		setSourceModule(0, sourceModule);
@@ -289,7 +287,7 @@ public class Turbulence extends ModuleBase
 	/// and one for the @a z coordinate.  The roughness value is equal to
 	/// the number of octaves used by the noise::module::Perlin noise
 	/// modules.
-	public void setRoughness (int roughness) throws ExceptionInvalidParam
+	public void setRoughness (int roughness) throws IllegalArgumentException
 	{
 		xDistortModule.setOctaveCount (roughness);
 		yDistortModule.setOctaveCount (roughness);

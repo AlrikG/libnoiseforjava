@@ -25,8 +25,6 @@
 
 package libnoiseforjava.module;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
-
 public class Exponent extends ModuleBase
 {
    /// Noise module that maps the output value from a source module onto an
@@ -46,7 +44,7 @@ public class Exponent extends ModuleBase
    /// Exponent to apply to the output value from the source module.
    double exponent;
 
-   public Exponent (ModuleBase sourceModule) throws ExceptionInvalidParam
+   public Exponent (ModuleBase sourceModule) throws IllegalArgumentException
    {
       super(1);
       setSourceModule(0, sourceModule);

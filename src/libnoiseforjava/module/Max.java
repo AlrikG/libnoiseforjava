@@ -25,8 +25,6 @@
 
 package libnoiseforjava.module;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
-
 public class Max extends ModuleBase
 {
    /// Noise module that outputs the larger of the two output values from two
@@ -34,7 +32,7 @@ public class Max extends ModuleBase
    ///
    /// This noise module requires two source modules.
    
-   public Max (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo) throws ExceptionInvalidParam
+   public Max (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo) throws IllegalArgumentException
    {
       super(2);
       setSourceModule(0, sourceModuleOne);

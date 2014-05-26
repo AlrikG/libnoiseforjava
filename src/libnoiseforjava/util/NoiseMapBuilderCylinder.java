@@ -25,7 +25,6 @@
 
 package libnoiseforjava.util;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
 import libnoiseforjava.model.Cylinder;
 
 public class NoiseMapBuilderCylinder extends NoiseMapBuilder
@@ -67,7 +66,7 @@ public class NoiseMapBuilderCylinder extends NoiseMapBuilder
 
 
 
-   public NoiseMapBuilderCylinder () throws ExceptionInvalidParam
+   public NoiseMapBuilderCylinder () throws IllegalArgumentException
    {
       super();
       lowerAngleBound = 0.0;
@@ -77,7 +76,7 @@ public class NoiseMapBuilderCylinder extends NoiseMapBuilder
    }
 
    @Override
-public void build () throws ExceptionInvalidParam
+public void build () throws IllegalArgumentException
    {
       if (upperAngleBound <= lowerAngleBound
             || upperHeightBound <= lowerHeightBound
@@ -85,7 +84,7 @@ public void build () throws ExceptionInvalidParam
             || destHeight <= 0
             || sourceModule == null
             || destNoiseMap == null)
-         throw  new ExceptionInvalidParam ("Invalid Parameter in NoiseMapBuilderCylinder");
+         throw  new IllegalArgumentException ("Invalid Parameter in NoiseMapBuilderCylinder");
 
 
       // Resize the destination noise map so that it can store the new output
@@ -174,11 +173,11 @@ public void build () throws ExceptionInvalidParam
    ///
    /// One unit is equal to the radius of the cylinder.
    public void setBounds (double lowerAngleBound, double upperAngleBound,
-         double lowerHeightBound, double upperHeightBound) throws ExceptionInvalidParam
+         double lowerHeightBound, double upperHeightBound) throws IllegalArgumentException
    {
       if (lowerAngleBound >= upperAngleBound
             || lowerHeightBound >= upperHeightBound)
-         throw new ExceptionInvalidParam ("Invalid Parameter in NoiseMapBuilder Cylinder");
+         throw new IllegalArgumentException ("Invalid Parameter in NoiseMapBuilder Cylinder");
 
       this.lowerAngleBound  = lowerAngleBound ;
       this.upperAngleBound  = upperAngleBound ;

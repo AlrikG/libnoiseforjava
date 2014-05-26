@@ -30,7 +30,6 @@ import java.util.Random;
 
 import libnoiseforjava.NoiseQuality;
 import libnoiseforjava.PerlinBasis;
-import libnoiseforjava.exception.ExceptionInvalidParam;
 
 public class RidgedMulti extends ModuleBase
 {
@@ -303,11 +302,11 @@ public class RidgedMulti extends ModuleBase
    ///
    /// The larger the number of octaves, the more time required to
    /// calculate the ridged-multifractal-noise value.
-   public void setOctaveCount (int octaveCount) throws ExceptionInvalidParam
+   public void setOctaveCount (int octaveCount) throws IllegalArgumentException
    {
       if (octaveCount > RIDGED_MAX_OCTAVE)
       {
-         throw new ExceptionInvalidParam ("An invalid parameter was passed" +
+         throw new IllegalArgumentException ("An invalid parameter was passed" +
          " to a libnoise function or method.");
       }
 

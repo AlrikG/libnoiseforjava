@@ -25,11 +25,8 @@
 
 package libnoiseforjava.module;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
-
 public class Clamp extends ModuleBase
 {
-
    /// Noise module that clamps the output value from a source module to a
    /// range of values.
    ///
@@ -57,7 +54,7 @@ public class Clamp extends ModuleBase
 
    double lowerBound, upperBound;
 
-   public Clamp (ModuleBase sourceModule) throws ExceptionInvalidParam
+   public Clamp (ModuleBase sourceModule) throws IllegalArgumentException
    {
       super(1);
       setSourceModule(0, sourceModule);

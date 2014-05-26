@@ -25,7 +25,6 @@
 
 package libnoiseforjava.util;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
 
 public class NoiseMap
 {
@@ -55,7 +54,7 @@ public class NoiseMap
 
    double borderValue;
 
-   public NoiseMap (int width, int height) throws ExceptionInvalidParam
+   public NoiseMap (int width, int height) throws IllegalArgumentException
    {
       setSize (width, height);
       noiseMap = new double [width][height];
@@ -81,11 +80,11 @@ public class NoiseMap
          return borderValue;
    }
 
-   public void setSize (int width, int height) throws ExceptionInvalidParam
+   public void setSize (int width, int height) throws IllegalArgumentException
    {
       if (width < 1 || height < 1)
          // Invalid width or height.
-         throw new ExceptionInvalidParam ("Invalid parameter in NoiseMap");
+         throw new IllegalArgumentException ("Invalid parameter in NoiseMap");
       else
       {
          this.width  = width;

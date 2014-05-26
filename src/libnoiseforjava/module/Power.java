@@ -25,8 +25,6 @@
 
 package libnoiseforjava.module;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
-
 public class Power extends ModuleBase
 {
    /// Noise module that raises the output value from a first source module
@@ -38,7 +36,7 @@ public class Power extends ModuleBase
    ///
    /// This noise module requires two source modules.
 
-   public Power (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo) throws ExceptionInvalidParam
+   public Power (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo) throws IllegalArgumentException
    {
       super(2);
       setSourceModule(0, sourceModuleOne);

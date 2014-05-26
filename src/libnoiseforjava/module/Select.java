@@ -26,7 +26,6 @@
 package libnoiseforjava.module;
 
 import libnoiseforjava.Interp;
-import libnoiseforjava.exception.ExceptionInvalidParam;
 import libnoiseforjava.exception.ExceptionNoModule;
 
 public class Select extends ModuleBase
@@ -82,7 +81,7 @@ public class Select extends ModuleBase
 
 
    public Select (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo,
-         ModuleBase sourceModuleThree) throws ExceptionInvalidParam
+         ModuleBase sourceModuleThree) throws IllegalArgumentException
    {
       super(3);
       setSourceModule(0, sourceModuleOne);

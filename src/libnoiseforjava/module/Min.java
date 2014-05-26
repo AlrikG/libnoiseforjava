@@ -25,8 +25,6 @@
 
 package libnoiseforjava.module;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
-
 public class Min extends ModuleBase
 {
    /// Noise module that outputs the smaller of the two output values from
@@ -36,7 +34,8 @@ public class Min extends ModuleBase
    ///
    /// This noise module requires two source modules.
 
-   public Min (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo) throws ExceptionInvalidParam
+   public Min (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo) 
+		   throws IllegalArgumentException
    {
       super(2);
       setSourceModule(0, sourceModuleOne);

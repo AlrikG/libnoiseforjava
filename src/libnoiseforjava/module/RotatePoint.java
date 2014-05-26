@@ -25,8 +25,6 @@
 
 package libnoiseforjava.module;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
-
 public class RotatePoint extends ModuleBase
 {
    /// Noise module that rotates the input value around the origin before
@@ -104,7 +102,7 @@ public class RotatePoint extends ModuleBase
    double zAngle;
 
 
-   public RotatePoint (ModuleBase sourceModule) throws ExceptionInvalidParam
+   public RotatePoint (ModuleBase sourceModule) throws IllegalArgumentException
    {
       super(1);
       setSourceModule(0, sourceModule);

@@ -26,7 +26,6 @@
 package libnoiseforjava.util;
 
 import libnoiseforjava.Interp;
-import libnoiseforjava.exception.ExceptionInvalidParam;
 
 public class RendererImage
 {
@@ -188,7 +187,7 @@ public class RendererImage
    double sinElev;
 
 
-   public RendererImage () throws ExceptionInvalidParam
+   public RendererImage () throws IllegalArgumentException
    {
       isLightEnabled = false;
       isWrapEnabled = false;
@@ -228,7 +227,7 @@ public class RendererImage
    /// towards the calculated color, and if the alpha value is low, this
    /// object weighs the blend towards the color from the corresponding
    /// pixel in the background image.
-   public void addGradientPoint (double gradientPos, ColorCafe gradientColor) throws ExceptionInvalidParam
+   public void addGradientPoint (double gradientPos, ColorCafe gradientColor) throws IllegalArgumentException
    {
       gradient.addGradientPoint (gradientPos, gradientColor);
    }
@@ -241,7 +240,7 @@ public class RendererImage
    /// This color gradient contains the following gradient points:
    /// - -1.0 maps to black
    /// - 1.0 maps to white
-   public void buildGrayscaleGradient () throws ExceptionInvalidParam
+   public void buildGrayscaleGradient () throws IllegalArgumentException
    {
       clearGradient ();
       gradient.addGradientPoint (-1.0, new ColorCafe (  0,   0,   0, 255));
@@ -256,7 +255,7 @@ public class RendererImage
    /// This gradient color at position 0.0 is the "sea level".  Above
    /// that value, the gradient contains greens, browns, and whites.
    /// Below that value, the gradient contains various shades of blue.
-   public void buildTerrainGradient () throws ExceptionInvalidParam
+   public void buildTerrainGradient () throws IllegalArgumentException
    {
       clearGradient ();
       gradient.addGradientPoint (-1.00, new ColorCafe (  0,   0, 128, 255));
@@ -392,14 +391,14 @@ public class RendererImage
    /// The background image and the destination image can safely refer to
    /// the same image, although in this case, the destination image is
    /// irretrievably blended into the background image.
-   public void render () throws ExceptionInvalidParam
+   public void render () throws IllegalArgumentException
    {
       if ( sourceNoiseMap == null
             || destImageCafe == null
             || sourceNoiseMap.getWidth  () <= 0
             || sourceNoiseMap.getHeight () <= 0
             || gradient.getGradientPointCount () < 2)
-         throw new ExceptionInvalidParam ("Invalid Parameter in RendererImage");
+         throw new IllegalArgumentException ("Invalid Parameter in RendererImage");
 
 
       int width  = sourceNoiseMap.getWidth  ();
@@ -409,7 +408,7 @@ public class RendererImage
       // source noise map.
       if (backgroundImage != null)
          if ( backgroundImage.getWidth  () != width || backgroundImage.getHeight () != height)
-            throw new ExceptionInvalidParam ("Invalid Parameter in RendererImage");
+            throw new IllegalArgumentException ("Invalid Parameter in RendererImage");
 
 
       // Create the destination image.  It is safe to reuse it if this is also the
@@ -756,10 +755,10 @@ public class RendererImage
    ///
    /// Make sure the light source is enabled via a call to the
    /// EnableLight() method before calling the Render() method.
-   public void setLightContrast (double lightContrast) throws ExceptionInvalidParam
+   public void setLightContrast (double lightContrast) throws IllegalArgumentException
    {
       if (lightContrast <= 0.0)  
-         throw new ExceptionInvalidParam ("Invalid Parameter in RendererImage");
+         throw new IllegalArgumentException ("Invalid Parameter in RendererImage");
 
 
       this.lightContrast = lightContrast;
@@ -790,10 +789,10 @@ public class RendererImage
    ///
    /// Make sure the light source is enabled via a call to the
    /// enableLight() method before calling the render() method.
-   public void setLightIntensity (double lightIntensity) throws ExceptionInvalidParam
+   public void setLightIntensity (double lightIntensity) throws IllegalArgumentException
    {
       if (lightIntensity < 0.0)
-         throw new ExceptionInvalidParam ("Invalid Parameter in RendererImage");
+         throw new IllegalArgumentException ("Invalid Parameter in RendererImage");
 
       this.lightIntensity = lightIntensity;
       this.recalcLightValues = true;

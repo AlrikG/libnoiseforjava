@@ -25,7 +25,6 @@
 
 package libnoiseforjava.util;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
 import libnoiseforjava.module.ModuleBase;
 
 public class NoiseMapBuilder
@@ -75,7 +74,7 @@ public class NoiseMapBuilder
    ModuleBase sourceModule;
 
 
-   public NoiseMapBuilder () throws ExceptionInvalidParam
+   public NoiseMapBuilder () throws IllegalArgumentException
    {
       callback = 0;
       destHeight = 0;
@@ -84,7 +83,7 @@ public class NoiseMapBuilder
       sourceModule = new ModuleBase(0);
    }
 
-   public NoiseMapBuilder (int height, int width) throws ExceptionInvalidParam
+   public NoiseMapBuilder (int height, int width) throws IllegalArgumentException
    {
       callback = 0;
       destHeight = 0;
@@ -112,7 +111,7 @@ public class NoiseMapBuilder
    /// If this method is successful, the destination noise map contains
    /// the coherent-noise values from the noise module specified by
    /// setSourceModule().
-   public void build () throws ExceptionInvalidParam
+   public void build () throws IllegalArgumentException
    {
       //override in child classes
    }

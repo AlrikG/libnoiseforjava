@@ -26,7 +26,6 @@
 package libnoiseforjava.module;
 
 import libnoiseforjava.Interp;
-import libnoiseforjava.exception.ExceptionInvalidParam;
 
 public class Blend extends ModuleBase
 {
@@ -56,7 +55,7 @@ public class Blend extends ModuleBase
    /// This noise module requires three source modules.
 
    public Blend (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo,
-         ModuleBase sourceModuleThree) throws ExceptionInvalidParam
+         ModuleBase sourceModuleThree) throws IllegalArgumentException
    {
       super(3);
       setSourceModule(0, sourceModuleOne);

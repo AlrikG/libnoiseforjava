@@ -27,7 +27,6 @@ package libnoiseforjava.module;
 
 import libnoiseforjava.Interp;
 import libnoiseforjava.Misc;
-import libnoiseforjava.exception.ExceptionInvalidParam;
 
 public class Terrace extends ModuleBase
 {
@@ -73,7 +72,7 @@ public class Terrace extends ModuleBase
    double [] controlPoints;
 
 
-   public Terrace (ModuleBase sourceModule) throws ExceptionInvalidParam
+   public Terrace (ModuleBase sourceModule) throws IllegalArgumentException
    {
       super(1);
       setSourceModule(0, sourceModule);
@@ -97,7 +96,7 @@ public class Terrace extends ModuleBase
    /// increases.  At the control points, its slope resets to zero.
    ///
    /// It does not matter which order these points are added.
-   public void addControlPoint (double value) throws ExceptionInvalidParam
+   public void addControlPoint (double value) throws IllegalArgumentException
    {
       // Find the insertion point for the new control point and insert the new
       // point at that position.  The control point array will remain sorted by
@@ -132,7 +131,7 @@ public class Terrace extends ModuleBase
    /// class ensures that the control point array is sorted by value.
    /// The code that maps a value onto the curve requires a sorted
    /// control point array.
-   public int findInsertionPos (double value) throws ExceptionInvalidParam
+   public int findInsertionPos (double value) throws IllegalArgumentException
    {
       int insertionPos;
       for (insertionPos = 0; insertionPos < controlPointCount; insertionPos++)
@@ -144,7 +143,7 @@ public class Terrace extends ModuleBase
          else if (value == controlPoints[insertionPos])
             // Each control point is required to contain a unique value, so throw
             // an exception.
-            throw new ExceptionInvalidParam ("Invalid Parameter in Terrace Noise Moduled");        
+            throw new IllegalArgumentException ("Invalid Parameter in Terrace Noise Moduled");        
       }
       return insertionPos;
    }
@@ -255,10 +254,10 @@ public double getValue (double x, double y, double z)
    /// Two or more control points define the terrace-forming curve.  The
    /// start of this curve has a slope of zero; its slope then smoothly
    /// increases.  At the control points, its slope resets to zero.
-   void makeControlPoints (int controlPointCount) throws ExceptionInvalidParam
+   void makeControlPoints (int controlPointCount) throws IllegalArgumentException
    {
       if (controlPointCount < 2)
-         throw new ExceptionInvalidParam ("Invalid Parameter in Terrace Noise Module");
+         throw new IllegalArgumentException ("Invalid Parameter in Terrace Noise Module");
 
       clearAllControlPoints ();
 

@@ -25,8 +25,6 @@
 
 package libnoiseforjava.module;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
-
 public class Abs extends ModuleBase
 {
    /// Noise module that outputs the absolute value of the output value from
@@ -36,7 +34,7 @@ public class Abs extends ModuleBase
    ///
    /// This noise module requires one source module.
 
-   Abs (ModuleBase sourceModule) throws ExceptionInvalidParam
+   Abs (ModuleBase sourceModule) throws IllegalArgumentException
    {
       super(1);
       setSourceModule(0, sourceModule);

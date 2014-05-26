@@ -25,7 +25,6 @@
 
 package libnoiseforjava.module;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
 import libnoiseforjava.exception.ExceptionNoModule;
 
 public class ModuleBase
@@ -157,8 +156,14 @@ public class ModuleBase
    ///
    /// A noise module does not modify a source module; it only modifies
    /// its output values.
-   public void setSourceModule (int index, ModuleBase sourceModule)
+   public void setSourceModule (int index, ModuleBase sourceModule) 
+   throws IllegalArgumentException
    {
+	   if (sourceModules != null)
+	   {
+		   if (index >= getSourceModuleCount () || index < 0)
+           throw new IllegalArgumentException("Invalid Parameter in ModuleBase");
+	   }
       this.sourceModules[index] = sourceModule;
    }
 

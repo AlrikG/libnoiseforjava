@@ -25,8 +25,6 @@
 
 package libnoiseforjava.module;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
-
 public class Multiply extends ModuleBase
 {
    /// Noise module that outputs the product of the two output values from
@@ -36,7 +34,7 @@ public class Multiply extends ModuleBase
    ///
    /// This noise module requires two source modules.
    
-   public Multiply (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo) throws ExceptionInvalidParam
+   public Multiply (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo) throws IllegalArgumentException
    {
       super(2);
       setSourceModule(0, sourceModuleOne);

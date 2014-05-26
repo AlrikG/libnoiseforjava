@@ -26,7 +26,6 @@
 package libnoiseforjava.util;
 
 import libnoiseforjava.Interp;
-import libnoiseforjava.exception.ExceptionInvalidParam;
 import libnoiseforjava.model.Plane;
 
 public class NoiseMapBuilderPlane extends NoiseMapBuilder
@@ -62,7 +61,7 @@ public class NoiseMapBuilderPlane extends NoiseMapBuilder
    double upperZBound;
 
 
-   public NoiseMapBuilderPlane () throws ExceptionInvalidParam
+   public NoiseMapBuilderPlane () throws IllegalArgumentException
    {
       super();
       isSeamlessEnabled = false;
@@ -72,7 +71,7 @@ public class NoiseMapBuilderPlane extends NoiseMapBuilder
       upperZBound = 0.0;
    }
    
-   public NoiseMapBuilderPlane (int height, int width) throws ExceptionInvalidParam
+   public NoiseMapBuilderPlane (int height, int width) throws IllegalArgumentException
    {
       super(height, width);
       isSeamlessEnabled = false;
@@ -83,7 +82,7 @@ public class NoiseMapBuilderPlane extends NoiseMapBuilder
    }
 
    @Override
-public void build () throws ExceptionInvalidParam
+public void build () throws IllegalArgumentException
    {
       if ( upperXBound <= lowerXBound
             || upperZBound <= lowerZBound
@@ -91,7 +90,7 @@ public void build () throws ExceptionInvalidParam
             || destHeight <= 0
             || sourceModule == null
             || destNoiseMap == null)
-         throw new ExceptionInvalidParam ("Invalid parameter in NoiseMapBuilderPlane");
+         throw new IllegalArgumentException ("Invalid parameter in NoiseMapBuilderPlane");
 
       // Resize the destination noise map so that it can store the new output
       // values from the source model.
@@ -212,10 +211,10 @@ public void build () throws ExceptionInvalidParam
    ///
    /// @throw ExceptionInvalidParam See the preconditions.
    public void setBounds (double lowerXBound, double upperXBound,
-         double lowerZBound, double upperZBound) throws ExceptionInvalidParam
+         double lowerZBound, double upperZBound) throws IllegalArgumentException
    {
       if (lowerXBound >= upperXBound || lowerZBound >= upperZBound)
-         throw new ExceptionInvalidParam ("Invalid parameter in NoiseMapBuilderPlane");
+         throw new IllegalArgumentException ("Invalid parameter in NoiseMapBuilderPlane");
 
       this.lowerXBound = lowerXBound;
       this.upperXBound = upperXBound;

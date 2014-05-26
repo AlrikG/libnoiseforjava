@@ -25,7 +25,6 @@
 
 package libnoiseforjava.util;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
 
 public class ImageCafe
 {
@@ -66,7 +65,7 @@ public class ImageCafe
    /// Array of ColorCafes holding the color values
    ColorCafe [][] imageCafeColors;
 
-   public ImageCafe (int width, int height) throws ExceptionInvalidParam
+   public ImageCafe (int width, int height) throws IllegalArgumentException
    {
       setSize (width, height);
       borderValue = new ColorCafe (0, 0, 0, 0);
@@ -102,11 +101,11 @@ public class ImageCafe
    /// possible width and height for the image.
    ///
    /// @throw ExceptionInvalidParam See the preconditions.
-   public void setSize (int width, int height) throws ExceptionInvalidParam
+   public void setSize (int width, int height) throws IllegalArgumentException
    {
       if (width < 0 || height < 0)
          // Invalid width or height.
-         throw new ExceptionInvalidParam ("Invalid Parameter in ImageCafe");
+         throw new IllegalArgumentException ("Invalid Parameter in ImageCafe");
       else
       {
          this.width  = width;

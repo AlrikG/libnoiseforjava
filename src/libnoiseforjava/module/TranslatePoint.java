@@ -25,8 +25,6 @@
 
 package libnoiseforjava.module;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
-
 public class TranslatePoint extends ModuleBase
 {
    /// Noise module that moves the coordinates of the input value before
@@ -67,7 +65,7 @@ public class TranslatePoint extends ModuleBase
    /// value.
    double zTranslation;
 
-   public TranslatePoint (ModuleBase sourceModule) throws ExceptionInvalidParam
+   public TranslatePoint (ModuleBase sourceModule) throws IllegalArgumentException
    {
       super(1);
       setSourceModule(0, sourceModule);

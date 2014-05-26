@@ -27,7 +27,6 @@ package libnoiseforjava.module;
 
 import libnoiseforjava.Interp;
 import libnoiseforjava.Misc;
-import libnoiseforjava.exception.ExceptionInvalidParam;
 
 public class Curve extends ModuleBase
 {
@@ -55,7 +54,7 @@ public class Curve extends ModuleBase
    int controlPointCount;
    ControlPoint[] controlPoints;
 
-   public Curve (ModuleBase sourceModule) throws ExceptionInvalidParam
+   public Curve (ModuleBase sourceModule)
    {
       super(1);
       setSourceModule(0, sourceModule);
@@ -65,7 +64,7 @@ public class Curve extends ModuleBase
    }
 
    public void addControlPoint (double inputValue, double outputValue)
-      throws ExceptionInvalidParam
+      throws IllegalArgumentException
    {
       // Find the insertion point for the new control point and insert the new
       // point at that position.  The control point array will remain sorted by
@@ -80,9 +79,10 @@ public class Curve extends ModuleBase
       controlPointCount = 0;
    }
 
-   public int findInsertionPos (double inputValue) throws ExceptionInvalidParam
+   public int findInsertionPos (double inputValue)
    {
       int insertionPos;
+      
       for (insertionPos = 0; insertionPos < controlPointCount; insertionPos++)
       {
          if (inputValue < controlPoints[insertionPos].inputValue)
@@ -92,7 +92,7 @@ public class Curve extends ModuleBase
          else if (inputValue == controlPoints[insertionPos].inputValue)
             // Each control point is required to contain a unique input value, so
             // throw an exception.
-            throw new ExceptionInvalidParam("Invalid Parameter in Curve");
+            throw new IllegalArgumentException("Invalid Parameter in Curve");
       }
       return insertionPos;
    }

@@ -25,7 +25,6 @@
 
 package libnoiseforjava.util;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
 
 public class RendererNormalMap
 {
@@ -68,7 +67,7 @@ public class RendererNormalMap
    NoiseMap sourceNoiseMap;
 
 
-   public RendererNormalMap () throws ExceptionInvalidParam
+   public RendererNormalMap () throws IllegalArgumentException
    {
       bumpHeight = 1.0;
       isWrapEnabled = false;
@@ -76,7 +75,7 @@ public class RendererNormalMap
       sourceNoiseMap = new NoiseMap(0,0);
    }
 
-   public RendererNormalMap (int height, int width) throws ExceptionInvalidParam
+   public RendererNormalMap (int height, int width) throws IllegalArgumentException
    {
       bumpHeight = 1.0;
       isWrapEnabled = false;
@@ -140,13 +139,13 @@ public class RendererNormalMap
    /// @post The original contents of the destination image is destroyed.
    ///
    /// @throw ExceptionInvalidParam See the preconditions.
-   public void render () throws ExceptionInvalidParam
+   public void render () throws IllegalArgumentException
    {
       if ( sourceNoiseMap == null
             || destImageCafe == null
             || sourceNoiseMap.getWidth  () <= 0
             || sourceNoiseMap.getHeight () <= 0)
-         throw new ExceptionInvalidParam ("Invalid Parameter in RendererNormalMap");
+         throw new IllegalArgumentException ("Invalid Parameter in RendererNormalMap");
 
 
       int width  = sourceNoiseMap.getWidth  ();

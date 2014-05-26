@@ -26,7 +26,6 @@
 package libnoiseforjava.util;
 
 import libnoiseforjava.Misc;
-import libnoiseforjava.exception.ExceptionInvalidParam;
 
 public class GradientColor
 {
@@ -81,7 +80,7 @@ public class GradientColor
    /// @throw noise::ExceptionInvalidParam See the precondition.
    ///
    /// It does not matter which order these gradient points are added.
-   public void addGradientPoint (double gradientPos, ColorCafe gradientColor) throws ExceptionInvalidParam
+   public void addGradientPoint (double gradientPos, ColorCafe gradientColor) throws IllegalArgumentException
    {
       // Find the insertion point for the new gradient point and insert the new
       // gradient point at that insertion point.  The gradient point array will
@@ -114,7 +113,7 @@ public class GradientColor
    /// object ensures that the gradient-point array is sorted by input
    /// value.  The code that maps a value to a color requires a sorted
    /// gradient-point array.
-   public int findInsertionPos (double gradientPos) throws ExceptionInvalidParam
+   public int findInsertionPos (double gradientPos) throws IllegalArgumentException
    {
       int insertionPos;
       for (insertionPos = 0; insertionPos < gradientPointCount;
@@ -126,7 +125,7 @@ public class GradientColor
          } else if (gradientPos == gradientPoints[insertionPos].position) {
             // Each gradient point is required to contain a unique gradient
             // position, so throw an exception.
-            throw new ExceptionInvalidParam ("Invalid Parameter in Gradient Color");
+            throw new IllegalArgumentException ("Invalid Parameter in Gradient Color");
          }
       }
       return insertionPos;

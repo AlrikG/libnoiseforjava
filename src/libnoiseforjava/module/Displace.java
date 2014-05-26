@@ -25,7 +25,6 @@
 
 package libnoiseforjava.module;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
 import libnoiseforjava.exception.ExceptionNoModule;
 
 public class Displace extends ModuleBase
@@ -55,7 +54,7 @@ public class Displace extends ModuleBase
    /// This noise module requires four source modules.
 
    public Displace (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo,
-         ModuleBase sourceModuleThree, ModuleBase sourceModuleFour) throws ExceptionInvalidParam
+         ModuleBase sourceModuleThree, ModuleBase sourceModuleFour) throws IllegalArgumentException
    {
       super(4);
       setSourceModule(0, sourceModuleOne);

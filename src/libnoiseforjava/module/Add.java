@@ -25,8 +25,6 @@
 
 package libnoiseforjava.module;
 
-import libnoiseforjava.exception.ExceptionInvalidParam;
-
 public class Add extends ModuleBase
 {
    /// Noise module that outputs the additive value of the output value from
@@ -34,7 +32,7 @@ public class Add extends ModuleBase
    ///
    /// This noise module requires two source modules.
 
-   public Add (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo) throws ExceptionInvalidParam
+   public Add (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo) throws IllegalArgumentException
    {
       super(2);
       setSourceModule(0, sourceModuleOne);

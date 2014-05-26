@@ -30,7 +30,6 @@ import java.util.Random;
 
 import libnoiseforjava.NoiseQuality;
 import libnoiseforjava.PerlinBasis;
-import libnoiseforjava.exception.ExceptionInvalidParam;
 
 public class Perlin extends ModuleBase
 {
