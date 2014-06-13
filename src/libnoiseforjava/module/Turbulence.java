@@ -244,7 +244,7 @@ public class Turbulence extends ModuleBase
 	/// changes to the displacement amount.  Low values smoothly change
 	/// the displacement amount.  High values roughly change the
 	/// displacement amount, which produces more "kinky" changes.
-	public int getRoughnessCount ()
+	public int getRoughness ()
 	{
 		return xDistortModule.getOctaveCount ();
 	}
