@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2003, 2004 Jason Bevins (original libnoise code)
  * Copyright © 2010 Thomas J. Hodge (java port of libnoise)
+ * Copyright (c) 2014 Nick Whitney (implemented javadoc)
  * 
  * This file is part of libnoiseforjava.
  * 
@@ -25,20 +26,25 @@
 
 package libnoiseforjava.module;
 
+/** 
+ * Noise module that outputs a constant value.
+ * <p>
+ * <img src="http://libnoise.sourceforge.net/docs/moduleconst.png">
+ * <p>
+ * To specify the constant value, call the setConstValue() method.
+ * <p>
+ * This noise module is not useful by itself, but it is often used as a
+ * source module for other noise modules.
+ * <p>
+ * This noise module does not require any source modules.
+ * 
+ * @see <a href="http://libnoise.sourceforge.net/docs/classnoise_1_1module_1_1Const.html">noise::module::Const</a>
+ */
 public class Const extends ModuleBase
 {
-   /// Noise module that outputs a constant value.
-   ///
-   /// @image html moduleconst.png
-   ///
-   /// To specify the constant value, call the setConstValue() method.
-   ///
-   /// This noise module is not useful by itself, but it is often used as a
-   /// source module for other noise modules.
-   ///
-   /// This noise module does not require any source modules.
-
-   /// Default constant value for the Const noise module.
+   /**
+    *  Default constant value for the Const noise module.
+    */
    static final double DEFAULT_CONST_VALUE = 0.0;
 
    double constValue;
@@ -55,12 +61,12 @@ public double getValue (double x, double y, double z)
       return constValue;
    }
 
-   /// Sets the constant output value for this noise module.
-   ///
-   /// @param constValue The constant output value for this noise module.
+   /** Sets the constant output value for this noise module.
+   *
+   * @param constValue The constant output value for this noise module.
+   */
    public void setConstValue (double constValue)
    {
       this.constValue = constValue;
    }
-
 }

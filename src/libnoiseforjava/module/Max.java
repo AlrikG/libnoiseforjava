@@ -25,13 +25,17 @@
 
 package libnoiseforjava.module;
 
+/** Noise module that outputs the larger of the two output values from two
+ * source modules.
+ * <p>
+ * <img src="http://libnoise.sourceforge.net/docs/modulemax.png">
+ * <p>
+ * This noise module requires two source modules.
+ * 
+ * @see <a href="http://libnoise.sourceforge.net/docs/classnoise_1_1module_1_1Max.html">noise::module:Max</a>
+ */
 public class Max extends ModuleBase
 {
-   /// Noise module that outputs the larger of the two output values from two
-   /// source modules.
-   ///
-   /// This noise module requires two source modules.
-   
    public Max (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo) throws IllegalArgumentException
    {
       super(2);
@@ -49,5 +53,4 @@ public double getValue (double x, double y, double z)
       double v1 = sourceModules[1].getValue (x, y, z);
       return Math.max(v0, v1);
     }
-
 }

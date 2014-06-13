@@ -25,15 +25,17 @@
 
 package libnoiseforjava.module;
 
+/** Noise module that outputs the product of the two output values from
+* two source modules.
+* <p>
+* <img src="http://libnoise.sourceforge.net/docs/modulemultiply.png">
+* <p>
+* This noise module requires two source modules.
+* 
+* @see <a href="http://libnoise.sourceforge.net/docs/classnoise_1_1module_1_1Multiply.html">noise::module:Multiply</a>
+*/
 public class Multiply extends ModuleBase
-{
-   /// Noise module that outputs the product of the two output values from
-   /// two source modules.
-   ///
-   /// @image html modulemultiply.png
-   ///
-   /// This noise module requires two source modules.
-   
+{  
    public Multiply (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo) throws IllegalArgumentException
    {
       super(2);

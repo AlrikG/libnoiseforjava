@@ -25,15 +25,18 @@
 
 package libnoiseforjava.module;
 
+/** 
+ * Noise module that outputs the absolute value of the output value from
+ * a source module.
+ * <p>
+ * <img src="http://libnoise.sourceforge.net/docs/moduleabs.png">
+ * <p>
+ * This noise module requires one source module.
+ * 
+ * @see <a href="http://libnoise.sourceforge.net/docs/classnoise_1_1module_1_1Abs.html">module::abs</a>
+ */
 public class Abs extends ModuleBase
 {
-   /// Noise module that outputs the absolute value of the output value from
-   /// a source module.
-   ///
-   /// @image html moduleabs.png
-   ///
-   /// This noise module requires one source module.
-
    Abs (ModuleBase sourceModule) throws IllegalArgumentException
    {
       super(1);

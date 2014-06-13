@@ -96,12 +96,9 @@ public class Interp
       ///
       /// The second derivative of a quintic S-curve is zero at @a a = 0.0 and
       /// @a a = 1.0
-      static double SCurve5 (double a)
+      public static double SCurve5 (double a)
       {
-        double a3 = a * a * a;
-        double a4 = a3 * a;
-        double a5 = a4 * a;
-        return (6.0 * a5) - (15.0 * a4) + (10.0 * a3);
+    	  return a*a*a*(a*(a*6-15)+10);
       }
 
 }

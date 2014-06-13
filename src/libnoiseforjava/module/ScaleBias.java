@@ -25,29 +25,37 @@
 
 package libnoiseforjava.module;
 
+/** 
+ * Noise module that applies a scaling factor and a bias to the output
+ * value from a source module.
+ *
+ * The getValue() method retrieves the output value from the source
+ * module, multiplies it with a scaling factor, adds a bias to it, then
+ * outputs the value.
+ *
+ * This noise module requires one source module.
+ */
 public class ScaleBias extends ModuleBase
 {
-
-   /// Noise module that applies a scaling factor and a bias to the output
-   /// value from a source module.
-   ///
-   /// The getValue() method retrieves the output value from the source
-   /// module, multiplies it with a scaling factor, adds a bias to it, then
-   /// outputs the value.
-   ///
-   /// This noise module requires one source module.
-
-   /// Default bias for the ScaleBias noise module.
+   /** 
+    * Default bias for the ScaleBias noise module.
+    */
    static final double DEFAULT_BIAS = 0.0;
 
-   /// Default scale for the ScaleBias noise module.
+   /** 
+    * Default scale for the ScaleBias noise module.
+    */
    static final double DEFAULT_SCALE = 1.0;
 
-   /// Bias to apply to the scaled output value from the source module.
+   /** 
+    * Bias to apply to the scaled output value from the source module.
+    */
    double bias;
 
-   /// Scaling factor to apply to the output value from the source
-   /// module.
+   /** 
+    * Scaling factor to apply to the output value from the source
+    * module.
+    */
    double scale;
 
    
@@ -59,62 +67,61 @@ public class ScaleBias extends ModuleBase
       scale = DEFAULT_SCALE;
    }
 
+   /** The getValue() method retrieves the output value from the source
+   * module, multiplies it with the scaling factor, adds the bias to
+   * it, then outputs the value.
+   */
    @Override
-public double getValue (double x, double y, double z)
+   public double getValue (double x, double y, double z)
    {
       assert (sourceModules[0] != null);
 
       return sourceModules[0].getValue (x, y, z) * scale + bias;
    }
 
-   /// Returns the bias to apply to the scaled output value from the
-   /// source module.
-   ///
-   /// @returns The bias to apply.
-   ///
-   /// The getValue() method retrieves the output value from the source
-   /// module, multiplies it with the scaling factor, adds the bias to
-   /// it, then outputs the value.
+   /** 
+    * Returns the bias to apply to the scaled output value from the
+    * source module.
+    *
+    * @returns The bias to apply.
+    */
    public double getBias ()
    {
       return bias;
    }
 
-   /// Returns the scaling factor to apply to the output value from the
-   /// source module.
-   ///
-   /// @returns The scaling factor to apply.
-   ///
-   /// The getValue() method retrieves the output value from the source
-   /// module, multiplies it with the scaling factor, adds the bias to
-   /// it, then outputs the value.
+   /** 
+    * Returns the scaling factor to apply to the output value from the
+    * source module.
+    *
+    * @returns The scaling factor to apply.
+    *
+    * The getValue() method retrieves the output value from the source
+    * module, multiplies it with the scaling factor, adds the bias to
+    * it, then outputs the value.
+    */
    public double getScale ()
    {
       return scale;
    }
 
 
-   /// Sets the bias to apply to the scaled output value from the source
-   /// module.
-   ///
-   /// @param bias The bias to apply.
-   ///
-   /// The getValue() method retrieves the output value from the source
-   /// module, multiplies it with the scaling factor, adds the bias to
-   /// it, then outputs the value.
+   /** 
+    * Sets the bias to apply to the scaled output value from the source
+    * module.
+    *
+    * @param bias The bias to apply.
+    */
    public void setBias (double bias)
    {
       this.bias = bias;
    }
 
-   /// Sets the scaling factor to apply to the output value from the
-   /// source module.
-   ///
-   /// @param scale The scaling factor to apply.
-   ///
-   /// The getValue() method retrieves the output value from the source
-   /// module, multiplies it with the scaling factor, adds the bias to
-   /// it, then outputs the value.
+   /** Sets the scaling factor to apply to the output value from the
+   * source module.
+   *
+   * @param scale The scaling factor to apply.
+   */
    public void setScale (double scale)
    {
       this.scale = scale;

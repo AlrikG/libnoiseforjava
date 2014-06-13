@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2003, 2004 Jason Bevins (original libnoise code)
  * Copyright © 2010 Thomas J. Hodge (java port of libnoise)
+ * Copyright (c) 2014 Nick Whitney (implemented javadoc)
  * 
  * This file is part of libnoiseforjava.
  * 
@@ -27,18 +28,23 @@ package libnoiseforjava.module;
 
 import libnoiseforjava.NoiseGen;
 
+/** 
+ * Noise module that outputs a checkerboard pattern.
+ * <p>
+ * <img src="http://libnoise.sourceforge.net/docs/modulecheckerboard.png">
+ * <p>
+ * This noise module outputs unit-sized blocks of alternating values.
+ * The values of these blocks alternate between -1.0 and +1.0.
+ * <p>
+ * This noise module is not really useful by itself, but it is often used
+ * for debugging purposes.
+ * <p>
+ * This noise module does not require any source modules.
+ * 
+ * @see <a href="http://libnoise.sourceforge.net/docs/classnoise_1_1module_1_1Checkerboard.html">noise::module::Checkerboard</a>
+ */
 public class Checkerboard extends ModuleBase
 {
-   /// Noise module that outputs a checkerboard pattern.
-   ///
-   /// This noise module outputs unit-sized blocks of alternating values.
-   /// The values of these blocks alternate between -1.0 and +1.0.
-   ///
-   /// This noise module is not really useful by itself, but it is often used
-   /// for debugging purposes.
-   ///
-   /// This noise module does not require any source modules.
-
    public Checkerboard()    
    {
       super(0);

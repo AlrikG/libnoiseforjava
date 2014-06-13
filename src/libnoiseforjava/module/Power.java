@@ -25,17 +25,22 @@
 
 package libnoiseforjava.module;
 
+/** 
+ * Noise module that raises the output value from a first source module
+ * to the power of the output value from a second source module.
+ * <p>
+ * <img src="http://libnoise.sourceforge.net/docs/modulepower.png">
+ * <p>
+ * The first source module must have an index value of 0.
+ * <p>
+ * The second source module must have an index value of 1.
+ * <p>
+ * This noise module requires two source modules.
+ * 
+ * @see <a href="http://libnoise.sourceforge.net/docs/classnoise_1_1module_1_1Power.html">noise::module:Power</a>
+ */
 public class Power extends ModuleBase
 {
-   /// Noise module that raises the output value from a first source module
-   /// to the power of the output value from a second source module.
-   ///
-   /// The first source module must have an index value of 0.
-   ///
-   /// The second source module must have an index value of 1.
-   ///
-   /// This noise module requires two source modules.
-
    public Power (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo) throws IllegalArgumentException
    {
       super(2);
@@ -44,7 +49,7 @@ public class Power extends ModuleBase
    }
 
    @Override
-public double getValue (double x, double y, double z)
+   public double getValue (double x, double y, double z)
    {
       assert (sourceModules[0] != null);
       assert (sourceModules[1] != null);

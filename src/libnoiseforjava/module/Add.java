@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2003, 2004 Jason Bevins (original libnoise code)
  * Copyright © 2010 Thomas J. Hodge (java port of libnoise)
+ * Copyright (c) 2014 Nick Whitney (added javadoc)
  * 
  * This file is part of libnoiseforjava.
  * 
@@ -25,13 +26,14 @@
 
 package libnoiseforjava.module;
 
+/**
+ * Noise module that outputs the additive value of the output value from
+ * two source modules.
+ * <p>
+ * This noise module requires two source modules.
+ */
 public class Add extends ModuleBase
 {
-   /// Noise module that outputs the additive value of the output value from
-   /// two source modules.
-   ///
-   /// This noise module requires two source modules.
-
    public Add (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo) throws IllegalArgumentException
    {
       super(2);

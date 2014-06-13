@@ -25,15 +25,18 @@
 
 package libnoiseforjava.module;
 
+/** 
+ * Noise module that outputs the smaller of the two output values from
+ * two source modules.
+ * <p>
+ * <img src="http://libnoise.sourceforge.net/docs/modulemin.png">
+ * <p>
+ * This noise module requires two source modules.
+ * 
+ * @see <a href="http://libnoise.sourceforge.net/docs/classnoise_1_1module_1_1Min.html">noise::module:Min</a>
+ */
 public class Min extends ModuleBase
 {
-   /// Noise module that outputs the smaller of the two output values from
-   /// two source modules.
-   ///
-   /// @image html modulemin.png
-   ///
-   /// This noise module requires two source modules.
-
    public Min (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo) 
 		   throws IllegalArgumentException
    {

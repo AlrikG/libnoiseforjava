@@ -25,11 +25,17 @@
 
 package libnoiseforjava.module;
 
+/** 
+ * Noise module that inverts the output value from a source module.
+ * <p>
+ * <img src="http://libnoise.sourceforge.net/docs/moduleinvert.png">
+ * <p>
+ * This noise module requires one source module.
+ * 
+ * @see <a href="http://libnoise.sourceforge.net/docs/classnoise_1_1module_1_1Invert.html">noise::module:Invert</a>
+ */
 public class Invert extends ModuleBase
 {
-   /// Noise module that inverts the output value from a source module.
-   ///
-   /// This noise module requires one source module.
    public Invert (ModuleBase sourceModule) throws IllegalArgumentException
    {
       super(1);
@@ -43,5 +49,4 @@ public double getValue (double x, double y, double z)
 
       return -(sourceModules[0].getValue (x, y, z));
    }
-
 }

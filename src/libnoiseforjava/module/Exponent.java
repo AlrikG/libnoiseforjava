@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2003, 2004 Jason Bevins (original libnoise code)
  * Copyright © 2010 Thomas J. Hodge (java port of libnoise)
+ * Copyright (c) 2014 Nick Whitney (implemented javadoc)
  * 
  * This file is part of libnoiseforjava.
  * 
@@ -25,23 +26,31 @@
 
 package libnoiseforjava.module;
 
+/** 
+ * Noise module that maps the output value from a source module onto an
+ * exponential curve.
+ * <p>
+ * <img src="http://libnoise.sourceforge.net/docs/moduleexponent.png">
+ * <p>
+ * Because most noise modules will output values that range from -1.0 to
+ * +1.0, this noise module first normalizes this output value (the range
+ * becomes 0.0 to 1.0), maps that value onto an exponential curve, then
+ * rescales that value back to the original range.
+ * <p>
+ * This noise module requires one source module.
+ * 
+ * @see <a href="http://libnoise.sourceforge.net/docs/classnoise_1_1module_1_1Exponent.html">noise::module::Exponent</a>
+ */
 public class Exponent extends ModuleBase
 {
-   /// Noise module that maps the output value from a source module onto an
-   /// exponential curve.
-   ///
-   /// Because most noise modules will output values that range from -1.0 to
-   /// +1.0, this noise module first normalizes this output value (the range
-   /// becomes 0.0 to 1.0), maps that value onto an exponential curve, then
-   /// rescales that value back to the original range.
-   ///
-   /// This noise module requires one source module.
-
-   /// Default exponent for the Exponent noise module.
+   /** 
+    * Default exponent for the Exponent noise module.
+    */
    static final double DEFAULT_EXPONENT = 1.0;
 
-
-   /// Exponent to apply to the output value from the source module.
+   /** 
+    * Exponent to apply to the output value from the source module.
+    */
    double exponent;
 
    public Exponent (ModuleBase sourceModule) throws IllegalArgumentException
@@ -49,7 +58,6 @@ public class Exponent extends ModuleBase
       super(1);
       setSourceModule(0, sourceModule);
       exponent = DEFAULT_EXPONENT;
-
    }
 
    @Override
@@ -61,10 +69,12 @@ public double getValue (double x, double y, double z)
       return (Math.pow (Math.abs ((value + 1.0) / 2.0), exponent) * 2.0 - 1.0);
    }
 
-   /// Returns the exponent value to apply to the output value from the
-   /// source module.
-   ///
-   /// @returns The exponent value.
+   /** 
+    * Returns the exponent value to apply to the output value from the
+    * source module.
+    *
+    * @returns The exponent value.
+    */
    public double getExponent ()
    {
       return exponent;
@@ -74,5 +84,4 @@ public double getValue (double x, double y, double z)
    {
       this.exponent = exponent;
    }
-
 }

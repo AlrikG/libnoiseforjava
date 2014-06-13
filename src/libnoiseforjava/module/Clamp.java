@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2003, 2004 Jason Bevins (original libnoise code)
  * Copyright © 2010 Thomas J. Hodge (java port of libnoise)
+ * Copyright (c) 2014 Nick Whitney (implemented javadoc)
  * 
  * This file is part of libnoiseforjava.
  * 
@@ -25,31 +26,37 @@
 
 package libnoiseforjava.module;
 
+/** Noise module that clamps the output value from a source module to a
+* range of values.
+* <p>
+* <img src="http://libnoise.sourceforge.net/docs/moduleclamp.png">
+* <p>
+* The range of values in which to clamp the output value is called the
+* <i>clamping range</i>.
+* <p>
+* If the output value from the source module is less than the lower
+* bound of the clamping range, this noise module clamps that value to
+* the lower bound.  If the output value from the source module is
+* greater than the upper bound of the clamping range, this noise module
+* clamps that value to the upper bound.
+* <p>
+* To specify the upper and lower bounds of the clamping range, call the
+* setBounds() method.
+* <p>
+* This noise module requires one source module.
+* 
+* @see <a href="http://libnoise.sourceforge.net/docs/classnoise_1_1module_1_1Clamp.html">noise::module::Clamp</a>
+*/
 public class Clamp extends ModuleBase
 {
-   /// Noise module that clamps the output value from a source module to a
-   /// range of values.
-   ///
-   /// @image html moduleclamp.png
-   ///
-   /// The range of values in which to clamp the output value is called the
-   /// <i>clamping range</i>.
-   ///
-   /// If the output value from the source module is less than the lower
-   /// bound of the clamping range, this noise module clamps that value to
-   /// the lower bound.  If the output value from the source module is
-   /// greater than the upper bound of the clamping range, this noise module
-   /// clamps that value to the upper bound.
-   ///
-   /// To specify the upper and lower bounds of the clamping range, call the
-   /// setBounds() method.
-   ///
-   /// This noise module requires one source module.
-
-   /// Default lower bound of the clamping range for the Clamp noise module.
+   /**
+    *  Default lower bound of the clamping range for the Clamp noise module.
+    */
    static final double DEFAULT_CLAMP_LOWER_BOUND = -1.0;
 
-   /// Default upper bound of the clamping range for the Clamp noise module.
+   /**
+    *  Default upper bound of the clamping range for the Clamp noise module.
+    */
    static final double DEFAULT_CLAMP_UPPER_BOUND = 1.0;
 
    double lowerBound, upperBound;
@@ -84,5 +91,4 @@ public double getValue (double x, double y, double z)
       this.lowerBound = lowerBound;
       this.upperBound = upperBound;
    }
-
 }

@@ -27,35 +27,38 @@ package libnoiseforjava.module;
 
 import libnoiseforjava.Interp;
 
+/** 
+ * Noise module that outputs a weighted blend of the output values from
+ * two source modules given the output value supplied by a control module.
+ * <p>
+ * <img src="http://libnoise.sourceforge.net/docs/moduleblend.png">
+ * <p>
+ * Unlike most other noise modules, the index value assigned to a source
+ * module determines its role in the blending operation:
+ * <ul>
+ * <li>Source module 0 outputs one of the values to blend.
+ * <li>Source module 1 outputs one of the values to blend.
+ * <li>Source module 2 is known as the <i>control module</i>.  The control
+ * module determines the weight of the blending operation.  Negative values
+ * weigh the blend towards the output value from the source module with an
+ * index value of 0. Positive values weigh the blend towards the output value
+ * from the source module with an index value of 1.
+ * </ul>
+ * An application can pass the control module to the setControlModule()
+ * method instead of the setSourceModule() method.  This may make the
+ * application code easier to read.
+ * <p>
+ * This noise module uses linear interpolation to perform the blending
+ * operation.
+ * <p>
+ * This noise module requires three source modules.
+ * 
+ * @see <a href="http://libnoise.sourceforge.net/docs/classnoise_1_1module_1_1Blend.html">noise::module::Blend</a>
+ */
 public class Blend extends ModuleBase
 {
-   /// Noise module that outputs a weighted blend of the output values from
-   /// two source modules given the output value supplied by a control module.
-   ///
-   /// Unlike most other noise modules, the index value assigned to a source
-   /// module determines its role in the blending operation:
-   /// - Source module 0 outputs one of the
-   ///   values to blend.
-   /// - Source module 1 outputs one of the
-   ///   values to blend.
-   /// - Source module 2 is known as the <i>control
-   ///   module</i>.  The control module determines the weight of the
-   ///   blending operation.  Negative values weigh the blend towards the
-   ///   output value from the source module with an index value of 0.
-   ///   Positive values weigh the blend towards the output value from the
-   ///   source module with an index value of 1.
-   ///
-   /// An application can pass the control module to the setControlModule()
-   /// method instead of the setSourceModule() method.  This may make the
-   /// application code easier to read.
-   ///
-   /// This noise module uses linear interpolation to perform the blending
-   /// operation.
-   ///
-   /// This noise module requires three source modules.
-
-   public Blend (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo,
-         ModuleBase sourceModuleThree) throws IllegalArgumentException
+   public Blend (ModuleBase sourceModuleOne, ModuleBase sourceModuleTwo, ModuleBase sourceModuleThree)
+	   throws IllegalArgumentException
    {
       super(3);
       setSourceModule(0, sourceModuleOne);

@@ -25,80 +25,115 @@
 
 package libnoiseforjava.module;
 
+/** 
+ * Noise module that rotates the input value around the origin before
+ * returning the output value from a source module.
+ * <p>
+ * <img src="http://libnoise.sourceforge.net/docs/modulerotatepoint.png">
+ * <p>
+ * The getValue() method rotates the coordinates of the input value
+ * around the origin before returning the output value from the source
+ * module.  To set the rotation angles, call the setAngles() method.  To
+ * set the rotation angle around the individual @a x, @a y, or @a z axes,
+ * call the setXAngle(), setYAngle() or setZAngle() methods,
+ * respectively.
+ * <p>
+ * The coordinate system of the input value is assumed to be
+ * "left-handed" (@a x increases to the right, @a y increases upward,
+ * and @a z increases inward.)
+ * <p>
+ * This noise module requires one source module.
+ * 
+ * @see <a href="http://libnoise.sourceforge.net/docs/classnoise_1_1module_1_1RotatePoint.html">noise::module:RotatePoint</a>
+ */
 public class RotatePoint extends ModuleBase
 {
-   /// Noise module that rotates the input value around the origin before
-   /// returning the output value from a source module.
-   ///
-   /// The getValue() method rotates the coordinates of the input value
-   /// around the origin before returning the output value from the source
-   /// module.  To set the rotation angles, call the setAngles() method.  To
-   /// set the rotation angle around the individual @a x, @a y, or @a z axes,
-   /// call the setXAngle(), setYAngle() or setZAngle() methods,
-   /// respectively.
-   ///
-   /// The coordinate system of the input value is assumed to be
-   /// "left-handed" (@a x increases to the right, @a y increases upward,
-   /// and @a z increases inward.)
-   ///
-   /// This noise module requires one source module.
-
-   /// Default @a x rotation angle for the RotatePoint noise
-   /// module.
+   /** 
+    * Default x rotation angle for the RotatePoint noise
+    * module.
+    */
    static final double DEFAULT_ROTATE_X = 0.0;
 
-   /// Default @a y rotation angle for the RotatePoint noise
-   /// module.
+   /** 
+    * Default y rotation angle for the RotatePoint noise
+    * module.
+    */
    static final double DEFAULT_ROTATE_Y = 0.0;
 
-   /// Default @a z rotation angle for the RotatePoint noise
-   /// module.
+   /** 
+    * Default z rotation angle for the RotatePoint noise
+    * module.
+    */
    static final double DEFAULT_ROTATE_Z = 0.0;
 
 
-   /// An entry within the 3x3 rotation matrix used for rotating the
-   /// input value.
+   /** 
+    * An entry within the 3x3 rotation matrix used for rotating the
+    * input value.
+    */
    double x1Matrix;
 
-   /// An entry within the 3x3 rotation matrix used for rotating the
-   /// input value.
+   /** 
+    * An entry within the 3x3 rotation matrix used for rotating the
+    * input value.
+    */
    double x2Matrix;
 
-   /// An entry within the 3x3 rotation matrix used for rotating the
-   /// input value.
+   /** 
+    * An entry within the 3x3 rotation matrix used for rotating the
+    * input value.
+    */
    double x3Matrix;
 
-   /// @a x rotation angle applied to the input value, in degrees.
+   /** 
+    * x rotation angle applied to the input value, in degrees.
+    */
    double xAngle;
 
-   /// An entry within the 3x3 rotation matrix used for rotating the
-   /// input value.
+   /** 
+    * An entry within the 3x3 rotation matrix used for rotating the
+    * input value.
+    */
    double y1Matrix;
 
-   /// An entry within the 3x3 rotation matrix used for rotating the
-   /// input value.
+   /** 
+    * An entry within the 3x3 rotation matrix used for rotating the
+    * input value.
+    */
    double y2Matrix;
 
-   /// An entry within the 3x3 rotation matrix used for rotating the
-   /// input value.
+   /** 
+    * An entry within the 3x3 rotation matrix used for rotating the
+    * input value.
+    */
    double y3Matrix;
 
-   /// @a y rotation angle applied to the input value, in degrees.
+   /** 
+    * y rotation angle applied to the input value, in degrees.
+    */
    double yAngle;
 
-   /// An entry within the 3x3 rotation matrix used for rotating the
-   /// input value.
+   /** 
+    * An entry within the 3x3 rotation matrix used for rotating the
+    * input value.
+    */
    double z1Matrix;
 
-   /// An entry within the 3x3 rotation matrix used for rotating the
-   /// input value.
+   /** 
+    * An entry within the 3x3 rotation matrix used for rotating the
+    * input value.
+    */
    double z2Matrix;
 
-   /// An entry within the 3x3 rotation matrix used for rotating the
-   /// input value.
+   /** 
+    * An entry within the 3x3 rotation matrix used for rotating the
+    * input value.
+    */
    double z3Matrix;
 
-   /// @a z rotation angle applied to the input value, in degrees.
+   /** 
+    * z rotation angle applied to the input value, in degrees.
+    */
    double zAngle;
 
 
@@ -146,67 +181,79 @@ public double getValue (double x, double y, double z)
       this.zAngle = zAngle;
    }
 
-   /// Returns the rotation angle around the @a x axis to apply to the
-   /// input value.
-   ///
-   /// @returns The rotation angle around the @a x axis, in degrees.
+   /** 
+    * Returns the rotation angle around the x axis to apply to the
+    * input value.
+    *
+    * @returns The rotation angle around the x axis, in degrees.
+    */
    public double getXAngle ()
    {
       return xAngle;
    }
 
-   /// Returns the rotation angle around the @a y axis to apply to the
-   /// input value.
-   ///
-   /// @returns The rotation angle around the @a y axis, in degrees.
+   /** 
+    * Returns the rotation angle around the @a y axis to apply to the
+    * input value.
+    *
+    * @returns The rotation angle around the @a y axis, in degrees.
+    */
    public double getYAngle ()
    {
       return yAngle;
    }
 
-   /// Returns the rotation angle around the @a z axis to apply to the
-   /// input value.
-   ///
-   /// @returns The rotation angle around the @a z axis, in degrees.
+   /** 
+    * Returns the rotation angle around the @a z axis to apply to the
+    * input value.
+    *
+    * @returns The rotation angle around the @a z axis, in degrees.
+    */
    public double getZAngle ()
    {
       return zAngle;
    }
 
-   /// Sets the rotation angle around the @a x axis to apply to the input
-   /// value.
-   ///
-   /// @param xAngle The rotation angle around the @a x axis, in degrees.
-   ///
-   /// The getValue() method rotates the coordinates of the input value
-   /// around the origin before returning the output value from the
-   /// source module.
+   /** 
+    * Sets the rotation angle around the x axis to apply to the input
+    * value.
+    * <p>
+    * The getValue() method rotates the coordinates of the input value
+    * around the origin before returning the output value from the
+    * source module.
+    *
+    * @param xAngle The rotation angle around the x axis, in degrees.
+    */
    public void setXAngle (double xAngle)
    {
       setAngles (xAngle, this.yAngle, this.zAngle);
    }
 
-   /// Sets the rotation angle around the @a y axis to apply to the input
-   /// value.
-   ///
-   /// @param yAngle The rotation angle around the @a y axis, in degrees.
-   ///
-   /// The getValue() method rotates the coordinates of the input value
-   /// around the origin before returning the output value from the
-   /// source module.
+   /** 
+    * Sets the rotation angle around the @a y axis to apply to the input
+    * value.
+    * <p>
+    * The getValue() method rotates the coordinates of the input value
+    * around the origin before returning the output value from the
+    * source module.
+    *
+    * @param yAngle The rotation angle around the @a y axis, in degrees.
+    */
    public void SetYAngle (double yAngle)
    {
       setAngles (this.xAngle, yAngle, this.zAngle);
    }
 
-   /// Sets the rotation angle around the @a z axis to apply to the input
-   /// value.
-   ///
-   /// @param zAngle The rotation angle around the @a z axis, in degrees.
-   ///
-   /// The getValue() method rotates the coordinates of the input value
-   /// around the origin before returning the output value from the
-   /// source module.
+   /** 
+    * Sets the rotation angle around the @a z axis to apply to the input
+    * value.
+    * <p>
+    * The getValue() method rotates the coordinates of the input value
+    * around the origin before returning the output value from the
+    * source module.
+    *
+    * @param zAngle The rotation angle around the @a z axis, in degrees.
+    */
    public void SetZAngle (double zAngle)
    {
       setAngles (this.xAngle, this.yAngle, zAngle);
