@@ -183,17 +183,19 @@ public class Voronoi extends ModuleBase
 			double xDist = xCandidate - x;
 			double yDist = yCandidate - y;
 			double zDist = zCandidate - z;
-			value = (Math.sqrt(xDist * xDist + yDist * yDist + zDist * zDist)
-					) * SQRT_3 - 1.0;
-		} else {
-			value = 0.0;
+			value = (Math.sqrt(xDist * xDist + yDist * yDist + zDist * zDist)) * SQRT_3 - 1.0;
+			
+			return Math.abs(value + (displacement * noisesource[0].getValue (
+					(int)(Math.floor (xCandidate)),
+					(int)(Math.floor (yCandidate)),
+					(int)(Math.floor (zCandidate)))));
 		}
-
-		// Return the calculated distance with the displacement value applied.
-		return Math.abs(value + (displacement * noisesource[0].getValue (
-				(int)(Math.floor (xCandidate)),
-				(int)(Math.floor (yCandidate)),
-				(int)(Math.floor (zCandidate)))));
+		else 
+		{
+			value = 0.0;
+			
+			return Math.abs(value + (displacement * noisesource[0].getValue (xCandidate, yCandidate, zCandidate)));
+		}	
 	}
 
 	/** Enables or disables applying the distance from the nearest seed
