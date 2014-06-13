@@ -65,11 +65,6 @@ public class PerlinBasis
 		}
 	}
 	
-	public void setNoiseQuality(NoiseQuality quality)
-	{
-		this.noiseQuality = quality;
-	}
-	
 	public void setSeed(int seed)
 	{
 		mutate(seed);
