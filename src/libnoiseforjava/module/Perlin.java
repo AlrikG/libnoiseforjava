@@ -224,10 +224,8 @@ public class Perlin extends ModuleBase
 				source[i].setSeed(seed);
 			}
 			
-			source[i].setNoiseQuality(noiseQuality);
-
-			frequencies[i] = Math.pow(lacunarity, i);
-			amplitudes[i] = Math.pow(persistence, source.length - i);
+			frequencies[i] = frequency / Math.pow(lacunarity, i);
+			amplitudes[i] = Math.pow(persistence, i);
 		}
 	}
 
