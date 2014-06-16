@@ -217,14 +217,11 @@ public class Perlin extends ModuleBase
 			if(seed != 0)
 			{
 				seed = rnd.nextInt();
-				source[i].setSeed(seed);
 			}
-			else
-			{
-				source[i].setSeed(seed);
-			}
+				
+			source[i].setSeed(seed);
 			
-			frequencies[i] = frequency / Math.pow(lacunarity, i);
+			frequencies[i] =  frequency * Math.pow(lacunarity, i);
 			amplitudes[i] = Math.pow(persistence, i);
 		}
 	}
@@ -237,7 +234,7 @@ public class Perlin extends ModuleBase
 
 		for(int i = 0; i < source.length; i++)
 		{
-			signal = source[i].getValue(x / frequencies[i], y / frequencies[i], z / frequencies[i]);
+			signal = source[i].getValue(x * frequencies[i], y * frequencies[i], z * frequencies[i]);
 			value += signal * amplitudes[i];
 		}
 
