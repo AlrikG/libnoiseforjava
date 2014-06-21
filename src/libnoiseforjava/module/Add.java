@@ -30,7 +30,11 @@ package libnoiseforjava.module;
  * Noise module that outputs the additive value of the output value from
  * two source modules.
  * <p>
+ * <img src="http://libnoise.sourceforge.net/docs/moduleadd.png">
+ * <p>
  * This noise module requires two source modules.
+ * 
+ * @see <a href="http://libnoise.sourceforge.net/docs/classnoise_1_1module_1_1Add.html">module::add</a>
  */
 public class Add extends ModuleBase
 {

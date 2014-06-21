@@ -35,6 +35,8 @@ import libnoiseforjava.PerlinBasis;
 /** 
  * Noise module that outputs 3-dimensional ridged-multifractal noise.
  * <p>
+ * <img src="http://libnoise.sourceforge.net/docs/moduleridgedmulti.png">
+ * <p>
  * This noise module, heavily based on the Perlin-noise module, generates
  * ridged-multifractal noise.  Ridged-multifractal noise is generated in
  * much of the same way as Perlin noise, except the output of each octave
@@ -96,6 +98,8 @@ import libnoiseforjava.PerlinBasis;
  * <a href=http://www.pandromeda.com/>MojoWorld</a>.  He is also one of
  * the authors in <i>Texturing and Modeling: A Procedural Approach</i>
  * (Morgan Kaufmann, 2002. ISBN 1-55860-848-6.)
+ * 
+ * @see <a href="http://libnoise.sourceforge.net/docs/classnoise_1_1module_1_1RidgedMulti.html">noise::module:RidgedMulti</a>
  */
 public class RidgedMulti extends ModuleBase
 {
@@ -222,7 +226,16 @@ public class RidgedMulti extends ModuleBase
 
 		for (int curOctave = 0; curOctave < octaveCount; curOctave++)
 		{	
-			signal = source[curOctave].getValue(x * frequencies[curOctave], y * frequencies[curOctave], z * frequencies[curOctave]);
+			double nx, ny, nz;
+			
+			nx = NoiseGen.MakeInt32Range(x);
+			ny = NoiseGen.MakeInt32Range(y);
+			nz = NoiseGen.MakeInt32Range(z);
+			
+			signal = source[curOctave].getValue(nx, ny, nz);
+//			signal = source[curOctave].getValue(x, y, z);
+//			int curSeed = (seed + curOctave) & 0x7fffffff;
+//			signal = NoiseGen.GradientCoherentNoise3D(nx, ny, nz, curSeed, NoiseQuality.QUALITY_FAST);
 			
 			// Make the ridges.
 			signal = Math.abs (signal);
@@ -245,6 +258,10 @@ public class RidgedMulti extends ModuleBase
 
 			// Add the signal to the output value.
 			value += (signal * spectralWeights[curOctave]);
+			
+			x *= lacunarity;
+			y *= lacunarity;
+			z *= lacunarity;
 		}
 
 		return (value * 1.25) - 1.0;
@@ -321,7 +338,6 @@ public class RidgedMulti extends ModuleBase
       this.lacunarity = lacunarity;
    }
 
-   /// Sets the number of octaves that generate the ridged-multifractal
    /** 
     * Sets the number of octaves that generate the ridged-multifractal
     * noise.

@@ -37,14 +37,14 @@ package libnoiseforjava.module;
  */
 public class Abs extends ModuleBase
 {
-   Abs (ModuleBase sourceModule) throws IllegalArgumentException
+   public Abs (ModuleBase sourceModule) throws IllegalArgumentException
    {
       super(1);
       setSourceModule(0, sourceModule);
    }
 
    @Override
-public double getValue (double x, double y, double z)
+   public double getValue (double x, double y, double z)
    {
       assert (this.sourceModules[0] != null);
 
