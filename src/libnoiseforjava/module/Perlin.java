@@ -207,19 +207,21 @@ public class Perlin extends ModuleBase
 		source = new PerlinBasis[octaveCount];
 		frequencies = new double[octaveCount];
 		amplitudes = new double[octaveCount];
-
+		
 		Random rnd = new Random(seed);
 		
 		for(int i = 0; i < octaveCount; i++)
 		{
 			source[i] = new PerlinBasis();
-			
-			if(seed != 0)
-			{
-				seed = rnd.nextInt();
-			}
 				
-			source[i].setSeed(seed);
+			if(seed == 0)
+			{
+				source[i].setSeed(0);
+			}
+			else
+			{
+				source[i].setSeed(rnd.nextInt());
+			}
 			
 			frequencies[i] =  frequency * Math.pow(lacunarity, i);
 			amplitudes[i] = Math.pow(persistence, i);

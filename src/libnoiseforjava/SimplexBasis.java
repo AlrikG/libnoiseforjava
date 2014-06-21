@@ -25,7 +25,6 @@ import java.util.Random;
  */
 public class SimplexBasis
 {
-	private static int randomSeed = 0;
 	private static int swapAmount = 400;
 
 	private static Grad grad3[] = { new Grad(1,1,0),new Grad(-1,1,0),new Grad(1,-1,0),new Grad(-1,-1,0),
@@ -65,7 +64,7 @@ public class SimplexBasis
 	{
 		p = p_supply.clone();
 
-		if (seed == randomSeed)
+		if (seed == 0)
 		{
 			Random rand = new Random();
 			seed = rand.nextInt();
@@ -134,7 +133,7 @@ public class SimplexBasis
 	}
 
 	// 2D simplex noise
-	public double noise(double xIn, double yIn)
+	public double getValue2D(double xIn, double yIn)
 	{
 		// Noise contributions from the three corners
 	    double n0, n1, n2; 
@@ -370,7 +369,7 @@ public class SimplexBasis
 	}
 	
 	// 4D simplex noise, better simplex rank ordering method 2012-03-09
-	public double noise(double x, double y, double z, double w)
+	public double getValue4D(double x, double y, double z, double w)
 	{
 		// Noise contributions from the five corners
 	    double n0, n1, n2, n3, n4; 
