@@ -26,8 +26,7 @@
 package libnoiseforjava.util;
 
 public class MiscUtilities
-{
-   
+{  
    // Performs linear interpolation between two 8-bit channel values.
    public static short blendChannel (int red, int red2, float alpha)
    {
