@@ -1,28 +1,29 @@
-/*
- * Copyright (C) 2003, 2004 Jason Bevins (original libnoise code)
- * Copyright (c) 2010 Thomas J. Hodge (java port of libnoise)
- * Copyright (c) 2014 Nick Whitney (changed noisegen to perlin basis)
- * 
- * This file is part of libnoiseforjava.
- * 
- * libnoiseforjava is a Java port of the C++ library libnoise, which may be found at 
- * http://libnoise.sourceforge.net/.  libnoise was developed by Jason Bevins, who may be 
- * contacted at jlbezigvins@gmzigail.com (for great email, take off every 'zig').
- * Porting to Java was done by Thomas Hodge, who may be contacted at
- * libnoisezagforjava@gzagmail.com (remove every 'zag').
- * 
- * libnoiseforjava is free software: you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the Free Software
- * Foundation, either version 3 of the License, or (at your option) any later version.
- * 
- * libnoiseforjava is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License along with
- * libnoiseforjava.  If not, see <http://www.gnu.org/licenses/>.
- * 
- */
+/*******************************************************************************
+ *  Copyright (C) 2003, 2004 Jason Bevins (original libnoise code)
+ *  Copyright © 2010 Thomas J. Hodge (java port of libnoise)
+ *  Copyright (c) Nick Whitney ( changed noisegen to perlin basis. added javadoc)
+ *  
+ *  This file is part of libnoiseforjava.
+ *  
+ *  libnoiseforjava is a Java port of the C++ library libnoise, which may be
+ *  found at http://libnoise.sourceforge.net/. libnoise was developed by Jason
+ *  Bevins, who may be contacted at jlbezigvins@gmzigail.com (for great email,
+ *  take off every 'zig'). Porting to Java was done by Thomas Hodge, who may be
+ *  contacted at libnoisezagforjava@gzagmail.com (remove every 'zag').
+ *  
+ *  libnoiseforjava is free software: you can redistribute it and/or modify it
+ *  under the terms of the GNU General Public License as published by the Free
+ *  Software Foundation, either version 3 of the License, or (at your option) any
+ *  later version.
+ *  
+ *  libnoiseforjava is distributed in the hope that it will be useful, but
+ *  WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ *  FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ *  details.
+ *  
+ *  You should have received a copy of the GNU General Public License along with
+ *  libnoiseforjava. If not, see <http://www.gnu.org/licenses/>.
+ *******************************************************************************/
 
 package libnoiseforjava.module;
 
@@ -32,356 +33,354 @@ import libnoiseforjava.NoiseGen;
 import libnoiseforjava.NoiseQuality;
 import libnoiseforjava.PerlinBasis;
 
-/** 
+/**
  * Noise module that outputs 3-dimensional ridged-multifractal noise.
+ * 
  * <p>
  * <img src="http://libnoise.sourceforge.net/docs/moduleridgedmulti.png">
+ * 
  * <p>
  * This noise module, heavily based on the Perlin-noise module, generates
- * ridged-multifractal noise.  Ridged-multifractal noise is generated in
- * much of the same way as Perlin noise, except the output of each octave
- * is modified by an absolute-value function.  Modifying the octave
- * values in this way produces ridge-like formations.
+ * ridged-multifractal noise. Ridged-multifractal noise is generated in much of
+ * the same way as Perlin noise, except the output of each octave is modified by
+ * an absolute-value function. Modifying the octave values in this way produces
+ * ridge-like formations.
+ * 
  * <p>
- * Ridged-multifractal noise does not use a persistence value.  This is
- * because the persistence values of the octaves are based on the values
- * generated from from previous octaves, creating a feedback loop (or
- * that's what it looks like after reading the code.)
+ * Ridged-multifractal noise does not use a persistence value. This is because
+ * the persistence values of the octaves are based on the values generated from
+ * from previous octaves, creating a feedback loop (or that's what it looks like
+ * after reading the code.)
+ * 
  * <p>
- * This noise module outputs ridged-multifractal-noise values that
- * usually range from -1.0 to +1.0, but there are no guarantees that all
- * output values will exist within that range.
+ * This noise module outputs ridged-multifractal-noise values that usually range
+ * from -1.0 to +1.0, but there are no guarantees that all output values will
+ * exist within that range.
+ * 
  * <p>
- * <b>Note:</b> For ridged-multifractal noise generated with only one octave, 
+ * <b>Note:</b> For ridged-multifractal noise generated with only one octave,
  * the output value ranges from -1.0 to 0.0.
+ * 
  * <p>
  * Ridged-multifractal noise is often used to generate craggy mountainous
  * terrain or marble-like textures.
+ * 
  * <p>
  * This noise module does not require any source modules.
+ * 
  * <p>
  * <b>Octaves</b>
+ * 
  * <p>
  * The number of octaves control the <i>amount of detail</i> of the
- * ridged-multifractal noise.  Adding more octaves increases the detail
- * of the ridged-multifractal noise, but with the drawback of increasing
- * the calculation time.
+ * ridged-multifractal noise. Adding more octaves increases the detail of the
+ * ridged-multifractal noise, but with the drawback of increasing the
+ * calculation time.
+ * 
  * <p>
  * An application may specify the number of octaves that generate
  * ridged-multifractal noise by calling the setOctaveCount() method.
+ * 
  * <p>
  * <b>Frequency</b>
+ * 
  * <p>
- * An application may specify the frequency of the first octave by
- * calling the setFrequency() method.
+ * An application may specify the frequency of the first octave by calling the
+ * setFrequency() method.
+ * 
  * <p>
  * <b>Lacunarity</b>
+ * 
  * <p>
- * The lacunarity specifies the frequency multipler between successive
- * octaves.
+ * The lacunarity specifies the frequency multipler between successive octaves.
+ * 
  * <p>
- * The effect of modifying the lacunarity is subtle; you may need to play
- * with the lacunarity value to determine the effects.  For best results,
- * set the lacunarity to a number between 1.5 and 3.5.
+ * The effect of modifying the lacunarity is subtle; you may need to play with
+ * the lacunarity value to determine the effects. For best results, set the
+ * lacunarity to a number between 1.5 and 3.5.
+ * 
  * <p>
  * <b>References &amp; Acknowledgments</b>
- * <p>
- * <b>OBSOLETE</b> 
- * <a href=http://www.texturingandmodeling.com/Musgrave.html>F.
- * Kenton "Doc Mojo" Musgrave's texturing page</a> - This page contains
- * links to source code that generates ridged-multfractal noise, among
- * other types of noise.  The source file <a
- * href=http://www.texturingandmodeling.com/CODE/MUSGRAVE/CLOUD/fractal.c>
- * fractal.c</a> contains the code I used in my ridged-multifractal class
- * (see the @a RidgedMultifractal() function.)  This code was written by F.
- * Kenton Musgrave, the person who created
- * <a href=http://www.pandromeda.com/>MojoWorld</a>.  He is also one of
- * the authors in <i>Texturing and Modeling: A Procedural Approach</i>
- * (Morgan Kaufmann, 2002. ISBN 1-55860-848-6.)
  * 
- * @see <a href="http://libnoise.sourceforge.net/docs/classnoise_1_1module_1_1RidgedMulti.html">noise::module:RidgedMulti</a>
+ * <p>
+ * <b>OBSOLETE</b> <a href=http://www.texturingandmodeling.com/Musgrave.html>F.
+ * Kenton "Doc Mojo" Musgrave's texturing page</a> - This page contains links to
+ * source code that generates ridged-multfractal noise, among other types of
+ * noise. The source file <a
+ * href=http://www.texturingandmodeling.com/CODE/MUSGRAVE/CLOUD/fractal.c>
+ * fractal.c</a> contains the code I used in my ridged-multifractal class (see
+ * the @a RidgedMultifractal() function.) This code was written by F. Kenton
+ * Musgrave, the person who created <a
+ * href=http://www.pandromeda.com/>MojoWorld</a>. He is also one of the authors
+ * in <i>Texturing and Modeling: A Procedural Approach</i> (Morgan Kaufmann,
+ * 2002. ISBN 1-55860-848-6.)
+ * 
+ * @see <a
+ *      href="http://libnoise.sourceforge.net/docs/classnoise_1_1module_1_1RidgedMulti.html">noise::module:RidgedMulti</a>
  */
-public class RidgedMulti extends ModuleBase
-{
-   /** 
-    * Default frequency for the noise::module::RidgedMulti noise module.
-    */
-   static final double DEFAULT_RIDGED_FREQUENCY = 1.0;
+public class RidgedMulti extends ModuleBase {
 
-   /** 
-    * Default lacunarity for the noise::module::RidgedMulti noise module.
-    */
-   static final double DEFAULT_RIDGED_LACUNARITY = 2.0;
+    /**
+     * Default frequency for the noise::module::RidgedMulti noise module.
+     */
+    static final double DEFAULT_RIDGED_FREQUENCY = 1.0;
 
-   /** 
-    * Default number of octaves for the noise::module::RidgedMulti noise
-    * module.
-    */
-   static final int DEFAULT_RIDGED_OCTAVE_COUNT = 6;
+    /**
+     * Default lacunarity for the noise::module::RidgedMulti noise module.
+     */
+    static final double DEFAULT_RIDGED_LACUNARITY = 2.0;
 
-   /** 
-    * Default noise quality for the noise::module::RidgedMulti noise
-    * module.
-    */
-   static final NoiseQuality DEFAULT_RIDGED_QUALITY = NoiseQuality.QUALITY_STD;
+    /**
+     * Default number of octaves for the noise::module::RidgedMulti noise
+     * module.
+     */
+    static final int DEFAULT_RIDGED_OCTAVE_COUNT = 6;
 
-   /** 
-    * Default noise seed for the noise::module::RidgedMulti noise module.
-    */
-   static final int DEFAULT_RIDGED_SEED = 0;
+    /**
+     * Default noise quality for the noise::module::RidgedMulti noise module.
+     */
+    static final NoiseQuality DEFAULT_RIDGED_QUALITY = NoiseQuality.QUALITY_STD;
 
-   /** 
-    * Maximum number of octaves for the noise::module::RidgedMulti noise
-    * module.
-    */
-   static final int RIDGED_MAX_OCTAVE = 30;
+    /**
+     * Default noise seed for the noise::module::RidgedMulti noise module.
+     */
+    static final int DEFAULT_RIDGED_SEED = 0;
 
-   /** 
-    * Frequency of the first octave.
-    */
-   double frequency;
+    /**
+     * Maximum number of octaves for the noise::module::RidgedMulti noise
+     * module.
+     */
+    static final int RIDGED_MAX_OCTAVE = 30;
 
-   /** 
-    * Frequency multiplier between successive octaves.
-    */
-   double lacunarity;
+    /**
+     * Frequency of the first octave.
+     */
+    double frequency;
 
-   /** 
-    * Total number of octaves that generate the ridged-multifractal
-    * noise.
-    */
-   int octaveCount;
+    /**
+     * Frequency multiplier between successive octaves.
+     */
+    double lacunarity;
 
-   /** 
-    * Contains the spectral weights for each octave.
-    */
-   double [] spectralWeights = new double[RIDGED_MAX_OCTAVE];
+    /**
+     * Total number of octaves that generate the ridged-multifractal noise.
+     */
+    int octaveCount;
 
-   /** 
-    * Seed value used by the ridged-multfractal-noise function.
-    */
-   int seed;
+    /**
+     * Contains the spectral weights for each octave.
+     */
+    double[] spectralWeights = new double[RIDGED_MAX_OCTAVE];
 
-	private PerlinBasis[] source;
-	double[] frequencies;
-	double[] amplitudes;
+    /**
+     * Seed value used by the ridged-multfractal-noise function.
+     */
+    int seed;
 
-	public RidgedMulti ()
-	{
-	   super(0);
-      	frequency = DEFAULT_RIDGED_FREQUENCY;
-      	lacunarity = DEFAULT_RIDGED_LACUNARITY;
-      	octaveCount = DEFAULT_RIDGED_OCTAVE_COUNT;
-      	seed = DEFAULT_RIDGED_SEED;
-   	}
-   
-	public void build()
-	{
-		source = new PerlinBasis[octaveCount];
-		frequencies = new double[octaveCount];
-		Random rnd = new Random(seed);
-		
-		double h = 1.0;
-		double frequency1 = 1.0;
+    private PerlinBasis[] source;
+    double[] frequencies;
+    double[] amplitudes;
 
-		for(int i = 0; i < octaveCount; i++)
-		{
-			source[i] = new PerlinBasis();
-			
-			if(seed != 0)
-			{
-				
-				seed = rnd.nextInt();
-				source[i].setSeed(seed + i);
-			}
-			else
-			{
-				source[i].setSeed(seed);
-			}
-			
-			frequencies[i] = Math.pow(lacunarity, i);
-			
-			this.spectralWeights[i] = Math.pow (frequency1, -h);
-			frequency1 *= lacunarity;
-		}
-	}
+    public RidgedMulti() {
+        super(0);
+        this.frequency = DEFAULT_RIDGED_FREQUENCY;
+        this.lacunarity = DEFAULT_RIDGED_LACUNARITY;
+        this.octaveCount = DEFAULT_RIDGED_OCTAVE_COUNT;
+        this.seed = DEFAULT_RIDGED_SEED;
+    }
 
-	// Multifractal code originally written by F. Kenton "Doc Mojo" Musgrave,
-	// 1998.  Modified by jas for use with libnoise.
-	@Override
-	public double getValue (double x, double y, double z)
-	{
-		x *= frequency;
-		y *= frequency;
-		z *= frequency;
+    public void build() {
+        this.source = new PerlinBasis[this.octaveCount];
+        this.frequencies = new double[this.octaveCount];
+        Random rnd = new Random(this.seed);
 
-		double signal = 0.0;
-		double value  = 0.0;
-		double weight = 1.0;
+        double h = 1.0;
+        double frequency1 = 1.0;
 
-		// These parameters should be user-defined; they may be exposed in a
-		// future version of libnoiseforjava.
-		double offset = 1.0;
-		double gain = 2.0;
+        for (int i = 0; i < this.octaveCount; i++) {
+            this.source[i] = new PerlinBasis();
 
-		for (int curOctave = 0; curOctave < octaveCount; curOctave++)
-		{	
-			double nx, ny, nz;
-			
-			nx = NoiseGen.MakeInt32Range(x);
-			ny = NoiseGen.MakeInt32Range(y);
-			nz = NoiseGen.MakeInt32Range(z);
-			
-			signal = source[curOctave].getValue(nx, ny, nz);
-//			signal = source[curOctave].getValue(x, y, z);
-//			int curSeed = (seed + curOctave) & 0x7fffffff;
-//			signal = NoiseGen.GradientCoherentNoise3D(nx, ny, nz, curSeed, NoiseQuality.QUALITY_FAST);
-			
-			// Make the ridges.
-			signal = Math.abs (signal);
-			signal = offset - signal;
+            if (this.seed != 0) {
 
-			// Square the signal to increase the sharpness of the ridges.
-			signal *= signal;
+                this.seed = rnd.nextInt();
+                this.source[i].setSeed(this.seed + i);
+            } else {
+                this.source[i].setSeed(this.seed);
+            }
 
-			// The weighting from the previous octave is applied to the signal.
-			// Larger values have higher weights, producing sharp points along the
-			// ridges.
-			signal *= weight;
+            this.frequencies[i] = Math.pow(this.lacunarity, i);
 
-			// Weight successive contributions by the previous signal.
-			weight = signal * gain;
-			if (weight > 1.0)
-				weight = 1.0;
-			if (weight < 0.0)
-				weight = 0.0;
+            this.spectralWeights[i] = Math.pow(frequency1, -h);
+            frequency1 *= this.lacunarity;
+        }
+    }
 
-			// Add the signal to the output value.
-			value += (signal * spectralWeights[curOctave]);
-			
-			x *= lacunarity;
-			y *= lacunarity;
-			z *= lacunarity;
-		}
+    // Multifractal code originally written by F. Kenton "Doc Mojo" Musgrave,
+    // 1998. Modified by jas for use with libnoise.
+    @Override
+    public double getValue(double x, double y, double z) {
+        x *= this.frequency;
+        y *= this.frequency;
+        z *= this.frequency;
 
-		return (value * 1.25) - 1.0;
-	}
+        double signal = 0.0;
+        double value = 0.0;
+        double weight = 1.0;
 
-   public double getFrequency ()
-   {
-      return frequency;
-   }
+        // These parameters should be user-defined; they may be exposed in a
+        // future version of libnoiseforjava.
+        double offset = 1.0;
+        double gain = 2.0;
 
-   /** 
-    * Returns the lacunarity of the ridged-multifractal noise.
-    * <p>
-    * The lacunarity is the frequency multiplier between successive
-    * octaves.
-    * 
-    * @returns The lacunarity of the ridged-multifractal noise.
-    */
-   public double getLacunarity ()
-   {
-      return lacunarity;
-   }
+        for (int curOctave = 0; curOctave < this.octaveCount; curOctave++) {
+            double nx, ny, nz;
 
-   /** 
-    * Returns the number of octaves that generate the
-    * ridged-multifractal noise.
-    * <p>
-    * The number of octaves controls the amount of detail in the
-    * ridged-multifractal noise.
-    * 
-    * @returns The number of octaves that generate the
-    * ridged-multifractal noise.
-    */
-   public int getOctaveCount ()
-   {
-      return octaveCount;
-   }
+            nx = NoiseGen.MakeInt32Range(x);
+            ny = NoiseGen.MakeInt32Range(y);
+            nz = NoiseGen.MakeInt32Range(z);
 
-   /** 
-    * Returns the seed value used by the ridged-multifractal-noise
-    * function.
-    *
-    * @returns The seed value.
-    */
-   public int getSeed ()
-   {
-      return seed;
-   }
+            signal = this.source[curOctave].getValue(nx, ny, nz);
+            // signal = source[curOctave].getValue(x, y, z);
+            // int curSeed = (seed + curOctave) & 0x7fffffff;
+            // signal = NoiseGen.GradientCoherentNoise3D(nx, ny, nz, curSeed,
+            // NoiseQuality.QUALITY_FAST);
 
+            // Make the ridges.
+            signal = Math.abs(signal);
+            signal = offset - signal;
 
-   /** 
-    * Sets the frequency of the first octave.
-    *
-    * @param frequency The frequency of the first octave.
-    */
-   public void setFrequency (double frequency)
-   {
-      this.frequency = frequency;
-   }
+            // Square the signal to increase the sharpness of the ridges.
+            signal *= signal;
 
-   /** 
-    * Sets the lacunarity of the ridged-multifractal noise.
-    * <p>
-    * The lacunarity is the frequency multiplier between successive
-    * octaves.
-    * <p>
-    * For best results, set the lacunarity to a number between 1.5 and
-    * 3.5.
-    *
-    * @param lacunarity The lacunarity of the ridged-multifractal noise.
-    */
-   public void setLacunarity (double lacunarity)
-   {
-      this.lacunarity = lacunarity;
-   }
+            // The weighting from the previous octave is applied to the signal.
+            // Larger values have higher weights, producing sharp points along
+            // the
+            // ridges.
+            signal *= weight;
 
-   /** 
-    * Sets the number of octaves that generate the ridged-multifractal
-    * noise.
-    * <p>
-    * The number of octaves controls the amount of detail in the
-    * ridged-multifractal noise.
-    * <p>
-    * The larger the number of octaves, the more time required to
-    * calculate the ridged-multifractal-noise value.
-    *
-    * @param octaveCount The number of octaves that generate the
-    * ridged-multifractal noise.
-    *
-    * @pre The number of octaves ranges from 1 to RIDGED_MAX_OCTAVE.
-    */
-   public void setOctaveCount (int octaveCount)
-   {
-      if (octaveCount > RIDGED_MAX_OCTAVE)
-      {
-         octaveCount = RIDGED_MAX_OCTAVE;
-      }
+            // Weight successive contributions by the previous signal.
+            weight = signal * gain;
+            if (weight > 1.0) {
+                weight = 1.0;
+            }
+            if (weight < 0.0) {
+                weight = 0.0;
+            }
 
-      this.octaveCount = octaveCount;
-   }
+            // Add the signal to the output value.
+            value += (signal * this.spectralWeights[curOctave]);
 
-   /** 
-    * Sets the seed value used by the ridged-multifractal-noise
-    * function.
-    *
-    * @param seed The seed value.
-    */
-   public void setSeed (int seed)
-   {
-      this.seed = seed;
-   }
+            x *= this.lacunarity;
+            y *= this.lacunarity;
+            z *= this.lacunarity;
+        }
 
-   public double[] getSpectralWeights()
-   {
-      return spectralWeights;
-   }
+        return (value * 1.25) - 1.0;
+    }
 
-   public void setSpectralWeights(double[] spectralWeights)
-   {
-      this.spectralWeights = spectralWeights;
-   }
+    public double getFrequency() {
+        return this.frequency;
+    }
+
+    /**
+     * Returns the lacunarity of the ridged-multifractal noise.
+     * 
+     * <p>
+     * The lacunarity is the frequency multiplier between successive octaves.
+     * 
+     * @returns The lacunarity of the ridged-multifractal noise.
+     */
+    public double getLacunarity() {
+        return this.lacunarity;
+    }
+
+    /**
+     * Returns the number of octaves that generate the ridged-multifractal
+     * noise.
+     * 
+     * <p>
+     * The number of octaves controls the amount of detail in the
+     * ridged-multifractal noise.
+     * 
+     * @returns The number of octaves that generate the ridged-multifractal
+     *          noise.
+     */
+    public int getOctaveCount() {
+        return this.octaveCount;
+    }
+
+    /**
+     * Returns the seed value used by the ridged-multifractal-noise function.
+     *
+     * @returns The seed value.
+     */
+    public int getSeed() {
+        return this.seed;
+    }
+
+    /**
+     * Sets the frequency of the first octave.
+     *
+     * @param frequency The frequency of the first octave.
+     */
+    public void setFrequency(double frequency) {
+        this.frequency = frequency;
+    }
+
+    /**
+     * Sets the lacunarity of the ridged-multifractal noise.
+     * 
+     * <p>
+     * The lacunarity is the frequency multiplier between successive octaves.
+     * 
+     * <p>
+     * For best results, set the lacunarity to a number between 1.5 and 3.5.
+     *
+     * @param lacunarity The lacunarity of the ridged-multifractal noise.
+     */
+    public void setLacunarity(double lacunarity) {
+        this.lacunarity = lacunarity;
+    }
+
+    /**
+     * Sets the number of octaves that generate the ridged-multifractal noise.
+     * 
+     * <p>
+     * The number of octaves controls the amount of detail in the
+     * ridged-multifractal noise.
+     * 
+     * <p>
+     * The larger the number of octaves, the more time required to calculate the
+     * ridged-multifractal-noise value.
+     *
+     * @param octaveCount The number of octaves that generate the
+     *            ridged-multifractal noise.
+     *
+     * @pre The number of octaves ranges from 1 to RIDGED_MAX_OCTAVE.
+     */
+    public void setOctaveCount(int octaveCount) {
+        if (octaveCount > RIDGED_MAX_OCTAVE) {
+            octaveCount = RIDGED_MAX_OCTAVE;
+        }
+
+        this.octaveCount = octaveCount;
+    }
+
+    /**
+     * Sets the seed value used by the ridged-multifractal-noise function.
+     *
+     * @param seed The seed value.
+     */
+    public void setSeed(int seed) {
+        this.seed = seed;
+    }
+
+    public double[] getSpectralWeights() {
+        return this.spectralWeights;
+    }
+
+    public void setSpectralWeights(double[] spectralWeights) {
+        this.spectralWeights = spectralWeights;
+    }
 
 }
