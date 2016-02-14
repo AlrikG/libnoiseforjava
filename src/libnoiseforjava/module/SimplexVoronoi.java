@@ -27,19 +27,18 @@
 
 package libnoiseforjava.module;
 
-import libnoiseforjava.NoiseGen;
-import libnoiseforjava.PerlinBasis;
+import libnoiseforjava.SimplexBasis;
 
 /**
- * Noise module that outputs Voronoi cells.
+ * Noise module that outputs Voronoi cells, using Simplex noise as the basis.
+ * 
+ * <p>
+ * <img src="http://libnoise.sourceforge.net/docs/modulevoronoi.png">
  * 
  * <p>
  * In mathematics, a <i>Voronoi cell</i> is a region containing all the points
  * that are closer to a specific <i>seed point</i> than to any other seed point.
  * These cells mesh with one another, producing polygon-like formations.
- * 
- * <p>
- * <img src="http://libnoise.sourceforge.net/docs/modulevoronoi.png">
  * 
  * <p>
  * By default, this noise module randomly places a seed point within each unit
@@ -67,7 +66,7 @@ import libnoiseforjava.PerlinBasis;
  * 
  * <p>
  * Voronoi cells are often used to generate cracked-mud terrain formations or
- * crystal-like textures
+ * crystal-like textures.
  * 
  * <p>
  * This noise module requires no source modules.
@@ -75,40 +74,40 @@ import libnoiseforjava.PerlinBasis;
  * @see <a
  *      href="http://libnoise.sourceforge.net/docs/classnoise_1_1module_1_1Voronoi.html">noise::module:Voronoi</a>
  */
-public class Voronoi extends ModuleBase {
+public class SimplexVoronoi extends ModuleBase {
 
     /**
      * Default displacement to apply to each cell for the Voronoi noise module.
      */
-    static final double DEFAULT_VORONOI_DISPLACEMENT = 1.0;
+    private static final double DEFAULT_VORONOI_DISPLACEMENT = 1.0;
 
     /**
      * Default frequency of the seed points for the Voronoi noise module.
      */
-    static final double DEFAULT_VORONOI_FREQUENCY = 1.0;
+    private static final double DEFAULT_VORONOI_FREQUENCY = 1.0;
 
     /**
      * Default seed of the noise function for the Voronoi noise module.
      */
-    static final int DEFAULT_VORONOI_SEED = 0;
+    private static final int DEFAULT_VORONOI_SEED = 0;
 
     private static final double SQRT_3 = 1.7320508075688772935;
 
     /**
      * Scale of the random displacement to apply to each Voronoi cell.
      */
-    double displacement;
+    private double displacement;
 
     /**
      * Determines if the distance from the nearest seed point is applied to the
      * output value.
      */
-    boolean enableDistance;
+    private boolean enableDistance;
 
     /**
      * Frequency of the seed points.
      */
-    double frequency;
+    private double frequency;
 
     /**
      * Seed value used by the coherent-noise function to determine the positions
@@ -116,21 +115,21 @@ public class Voronoi extends ModuleBase {
      */
     int seed;
 
-    PerlinBasis[] noisesource;
+    SimplexBasis[] noisesource;
 
-    public Voronoi() {
+    public SimplexVoronoi() {
         super(0);
         this.displacement = DEFAULT_VORONOI_DISPLACEMENT;
         this.enableDistance = false;
         this.frequency = DEFAULT_VORONOI_FREQUENCY;
         this.seed = DEFAULT_VORONOI_SEED;
 
-        this.noisesource = new PerlinBasis[3];
+        this.noisesource = new SimplexBasis[3];
     }
 
     public void build() {
         for (int i = 0; i < 3; i++) {
-            this.noisesource[i] = new PerlinBasis();
+            this.noisesource[i] = new SimplexBasis();
             this.noisesource[i].setSeed(this.seed + i);
         }
     }
@@ -163,9 +162,9 @@ public class Voronoi extends ModuleBase {
                     // Calculate the position and distance to the seed point
                     // inside of
                     // this unit cube.
-                    double xPos = xCur + NoiseGen.ValueNoise3D(xCur, yCur, zCur, this.seed);
-                    double yPos = yCur + NoiseGen.ValueNoise3D(xCur, yCur, zCur, this.seed + 1);
-                    double zPos = zCur + NoiseGen.ValueNoise3D(xCur, yCur, zCur, this.seed + 2);
+                    double xPos = xCur + this.noisesource[0].getValue(xCur, yCur, zCur);
+                    double yPos = yCur + this.noisesource[1].getValue(xCur, yCur, zCur);
+                    double zPos = zCur + this.noisesource[2].getValue(xCur, yCur, zCur);
                     double xDist = xPos - x;
                     double yDist = yPos - y;
                     double zDist = zPos - z;
@@ -191,18 +190,17 @@ public class Voronoi extends ModuleBase {
             double yDist = yCandidate - y;
             double zDist = zCandidate - z;
             value = (Math.sqrt(xDist * xDist + yDist * yDist + zDist * zDist)) * SQRT_3 - 1.0;
-
-            return Math.abs(value + (this.displacement * this.noisesource[0].getValue((int) (Math.floor(xCandidate)), (int) (Math.floor(yCandidate)), (int) (Math.floor(zCandidate)))));
         } else {
             value = 0.0;
-
-            return Math.abs(value + (this.displacement * this.noisesource[0].getValue(xCandidate, yCandidate, zCandidate)));
         }
+
+        // Return the calculated distance with the displacement value applied.
+        return Math.abs(value + (this.displacement * this.noisesource[0].getValue((int) (Math.floor(xCandidate)), (int) (Math.floor(yCandidate)), (int) (Math.floor(zCandidate)))));
     }
 
     /**
      * Enables or disables applying the distance from the nearest seed point to
-     * the output value.
+     * the output value
      * 
      * <p>
      * Applying the distance from the nearest seed point to the output value
@@ -210,7 +208,7 @@ public class Voronoi extends ModuleBase {
      * away that point is from the nearest seed point. Setting this value to @a
      * true (and setting the displacement to a near-zero value) causes this
      * noise module to generate cracked mud formations.
-     *
+     * 
      * @param enable Specifies whether to apply the distance to the output value
      *            or not.
      */
@@ -219,28 +217,28 @@ public class Voronoi extends ModuleBase {
     }
 
     /**
-     * Returns the displacement value of the Voronoi cells.
+     * Returns the displacement value of the Voronoi cells
      * 
      * <p>
      * This noise module assigns each Voronoi cell with a random constant value
      * from a coherent-noise function. The <i>displacement value</i> controls
      * the range of random values to assign to each cell. The range of random
      * values is +/- the displacement value.
-     *
-     * @return The displacement value of the Voronoi cells.
+     * 
+     * @returns The displacement value of the Voronoi cells.
      */
     public double getDisplacement() {
         return this.displacement;
     }
 
     /**
-     * Returns the frequency of the seed points.
+     * Returns the frequency of the seed points
      * 
      * <p>
      * The frequency determines the size of the Voronoi cells and the distance
      * between these cells.
-     *
-     * @return The frequency of the seed points.
+     * 
+     * @returns The frequency of the seed points.
      */
     public double GetFrequency() {
         return this.frequency;
@@ -248,12 +246,13 @@ public class Voronoi extends ModuleBase {
 
     /**
      * Returns the seed value used by the Voronoi cells
-     *
+     * 
+     * <p>
+     * The positions of the seed values are calculated by a coherent-noise
+     * function. By modifying the seed value, the output of that function
+     * changes.
+     * 
      * @returns The seed value.
-     *
-     *          The positions of the seed values are calculated by a
-     *          coherent-noise function. By modifying the seed value, the output
-     *          of that function changes.
      */
     public int getSeed() {
         return this.seed;
@@ -261,42 +260,45 @@ public class Voronoi extends ModuleBase {
 
     /**
      * Determines if the distance from the nearest seed point is applied to the
-     * output value.
-     *
-     * @returns - @a true if the distance is applied to the output value. - @a
-     *          false if not.
-     *
-     *          Applying the distance from the nearest seed point to the output
-     *          value causes the points in the Voronoi cells to increase in
-     *          value the further away that point is from the nearest seed
-     *          point.
+     * output value
+     * 
+     * <p>
+     * Applying the distance from the nearest seed point to the output value
+     * causes the points in the Voronoi cells to increase in value the further
+     * away that point is from the nearest seed point.
+     * 
+     * @return <ul>
+     *         <li> true if the distance is applied to the output value. <li>
+     *         false if not.
+     *         </ul>
      */
     public boolean IsDistanceEnabled() {
         return this.enableDistance;
     }
 
     /**
-     * Sets the displacement value of the Voronoi cells.
-     *
+     * Sets the displacement value of the Voronoi cells
+     * 
+     * <p>
+     * This noise module assigns each Voronoi cell with a random constant value
+     * from a coherent-noise function. The <i>displacement value</i> controls
+     * the range of random values to assign to each cell. The range of random
+     * values is +/- the displacement value.
+     * 
      * @param displacement The displacement value of the Voronoi cells.
-     *
-     *            This noise module assigns each Voronoi cell with a random
-     *            constant value from a coherent-noise function. The
-     *            <i>displacement value</i> controls the range of random values
-     *            to assign to each cell. The range of random values is +/- the
-     *            displacement value.
      */
     public void setDisplacement(double displacement) {
         this.displacement = displacement;
     }
 
     /**
-     * Sets the frequency of the seed points.
-     *
+     * Sets the frequency of the seed points
+     * 
+     * <p>
+     * The frequency determines the size of the Voronoi cells and the distance
+     * between these cells.
+     * 
      * @param frequency The frequency of the seed points.
-     *
-     *            The frequency determines the size of the Voronoi cells and the
-     *            distance between these cells.
      */
     public void setFrequency(double frequency) {
         this.frequency = frequency;
@@ -304,15 +306,15 @@ public class Voronoi extends ModuleBase {
 
     /**
      * Sets the seed value used by the Voronoi cells
-     *
+     * 
+     * <p>
+     * The positions of the seed values are calculated by a coherent-noise
+     * function. By modifying the seed value, the output of that function
+     * changes.
+     * 
      * @param seed The seed value.
-     *
-     *            The positions of the seed values are calculated by a
-     *            coherent-noise function. By modifying the seed value, the
-     *            output of that function changes.
      */
     public void setSeed(int seed) {
         this.seed = seed;
     }
-
 }

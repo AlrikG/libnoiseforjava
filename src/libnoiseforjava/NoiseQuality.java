@@ -24,34 +24,36 @@
  *  You should have received a copy of the GNU General Public License along with
  *  libnoiseforjava. If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
-
-package libnoiseforjava.module;
+package libnoiseforjava;
 
 /**
- * Noise module that outputs the absolute value of the output value from a
- * source module.
- * 
- * <p>
- * <img src="http://libnoise.sourceforge.net/docs/moduleabs.png">
- * 
- * <p>
- * This noise module requires one source module.
- * 
- * @see <a
- *      href="http://libnoise.sourceforge.net/docs/classnoise_1_1module_1_1Abs.html">module::abs</a>
+ * Enumerates the noise quality.
  */
-public class Abs extends ModuleBase {
+public enum NoiseQuality {
+    /**
+     * Generates coherent noise quickly.
+     * <p>
+     * When a coherent-noise function with this quality setting is used to generate a bump-map
+     * image, there are noticeable "creasing" artifacts in the resulting image. This is because the
+     * derivative of that function is discontinuous at integer boundaries.
+     */
+    QUALITY_FAST,
 
-    public Abs(ModuleBase sourceModule) throws IllegalArgumentException {
-        super(1);
-        setSourceModule(0, sourceModule);
-    }
+    /**
+     * Generates standard-quality coherent noise.
+     * <p>
+     * When a coherent-noise function with this quality setting is used to generate a bump-map
+     * image, there are some minor "creasing" artifacts in the resulting image. This is because the
+     * second derivative of that function is discontinuous at integer boundaries.
+     */
+    QUALITY_STD,
 
-    @Override
-    public double getValue(double x, double y, double z) {
-        assert (this.sourceModules[0] != null);
-
-        return Math.abs(this.sourceModules[0].getValue(x, y, z));
-    }
-
+    /**
+     * Generates the best-quality coherent noise.
+     * <p>
+     * When a coherent-noise function with this quality setting is used to generate a bump-map
+     * image, there are no "creasing" artifacts in the resulting image. This is because the first
+     * and second derivatives of that function are continuous at integer boundaries.
+     */
+    QUALITY_BEST
 }
